@@ -1,0 +1,24 @@
+{
+  "name": "express-file-service",
+  "version": "1.0.0",
+  "description": "Handle Uploaded Files for Digital Service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trantuan94/express-file-service.git"
+  },
+  "keywords": [
+    "FileService",
+    "HandleFile",
+    "ExpressJS"
+  ],
+  "author": "Tran Tuan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trantuan94/express-file-service/issues"
+  },
+  "homepage": "https://github.com/trantuan94/express-file-service#readme"
+}
