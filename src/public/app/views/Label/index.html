@@ -1,0 +1,65 @@
+<div class="row height100 overflow-auto">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title flex-content">
+                <span class="flex-item-vertial">Danh sách Tags</span>
+                <div class="btn-toolbar btn-group-sm flex-item-right">
+                    <a ng-click="fn.add()" class="btn btn-primary">
+                        <em><i class="fa fa-plus"></i> Thêm mới Tags</em>
+                    </a>
+                </div>
+            </h3>
+        </div>
+
+        <div class="panel-body">
+            <table ng-table="tableParams" show-filter="true" class="table table-bordered table-striped">
+                <tr ng-repeat="row in $data">
+                    <td title="'STT'" title-alt="'STT'" class="td_center">
+                        <small class="text-info truncate">{{$index + 1}}</small>
+                    </td>
+                    <td title="'Tên'" sortable="'name'" filter="{name: 'text'}">
+                        <small class="text-body truncate">{{row.name}}</small>
+                    </td>
+                    <td title="'Phân loại'" sortable="'mode'" filter="{mode: 'options'}" class="td_center">
+                        <small class="text-primary truncate">
+                           {{options[row.mode]}}
+                        </small>
+                    </td>
+                    <td title="'Công ty'" sortable="'company.name'" filter="{'company.name': 'text'}">
+                        <small class="text-body truncate">{{row.company ? row.company.name : ''}}</small>
+                    </td>
+                    <td title="'Ngày tạo'" sortable="'insert.when'" filter="{'insert.when': 'daterange'}" class="td_center">
+                        <small class="text-danger truncate">{{row.insert.when | date:'dd - MM - yyyy'}}</small>
+                    </td>
+                    <td title="'Hành động'" class="td_center">
+                        <button ng-click="$event.stopPropagation();fn.edit(row)" class="btn btn-sm btn-warning">
+                            <i class="fa fa-edit"></i> Sửa
+                        </button>
+
+                        <button ng-click="$event.stopPropagation();fn.delete(row)"
+                                class="btn btn-sm btn-danger" style="margin-top: 5px"
+                        >
+                            <i class="fa fa-times-circle"></i> Xóa
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="ng-table/filters/daterange.html">
+    <form class="form-inline">
+        <input class="form-control" format="yyyy-mm-dd" type="date" ng-model="params.filter()['insert.when']" />
+    </form>
+</script>
+
+<script type="text/ng-template" id="ng-table/filters/options.html">
+    <form class="form-inline">
+        <select ng-options="mode.value as mode.label for mode in modes"
+                class="form-control" ng-model="params.filter()['mode']">
+            <option value="" selected="selected">All</option>
+        </select>
+    </form>
+</script>

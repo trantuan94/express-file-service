@@ -1,0 +1,183 @@
+{
+  "ok": "OK",
+  "unauthorized": "UnauthorizedError: invalid token",
+  "unauthenticated": "Unauthenticated. User or password was invalid!",
+  "unprocessable": "Unprocessable entity",
+  "Bad_Request": "Bad request",
+  "Disable_Api": "API was already disabled",
+  "Forbidden": "Forbidden",
+  "Not_Found": "Not found",
+  "Not_Implement": "Function has not implemented yet",
+  "Internal_Server_Error": "Internal server error",
+  "Errors": {
+    "general": "An error occurred. Please try again",
+    "create": "Create failed: %0",
+    "update": "Update failed: %0",
+    "delete": "Delete failed: %0",
+    "login": "Email or password is incorrect",
+    "register": "Register failed: %0",
+    "Permission_Denied": "Permission denied",
+    "Cannot_Change_Order_Status": "You can not change order status by update order information",
+    "Cannot_Delete": "You have not permission for delete this",
+    "Change_Password": "Change password failed: %0",
+    "Change_Order_Status": "Change order status failed: %0",
+    "Email_Invalid": "Invalid email (%0)",
+    "Load_Detail_Failed": "Load detail failed: %0",
+    "Load_Lists_Failed": "Load lists failed: %0",
+    "New_Old_Pw_Must_Different": "New password must be different from old password",
+    "Incorrect_Password": "The password is incorrect. If you have forgotten your password, please contact your administrator for assistance.",
+    "Old_Pw_Not_Match": "Old password does not match",
+    "Pw_Len_Warning": "Password length invalid",
+    "Pw_Not_Match": "Confirm password does not match. Please try again.",
+    "Reset_Password": "Cannot reset password for this account.",
+    "accounts": {
+      "Not_Activated": "This account has not activated. Please enter your email to receive an activation code.",
+      "Activation_Expired": "Activation expired.",
+      "Activation_Invalid": "Activation code is invalid.",
+      "Customer_Not_Found": "No relationship found between customer and account"
+    },
+    "contracts": {
+      "Status_InValid": "The status value is invalid."
+    },
+    "groups": {
+      "default": "System group, can not create/edit/delete"
+    },
+    "playlist": {
+      "default": "System playlist, can not create/edit/delete"
+    },
+    "Create_Folder_Media": "Unable to create media folder: %0",
+    "deploy": "Deploy failed: %0",
+    "unDeploy": "Undeploy failed: %0",
+    "Device_Offline": "The device is offline. Unable to perform this operation.",
+    "device": {
+      "Not_Company_Found": "Device %0 is not assigned with company",
+      "Not_Group_Found": "Device %0 is not assigned with group"
+    }
+  },
+  "Success": {
+    "general": "Successfully!",
+    "create": "Create successfully",
+    "update": "Update successfully",
+    "delete": "Delete successfully",
+    "upload": "Upload data successfully",
+    "login": "Login successfully",
+    "register": "Register successfully",
+    "Change_Password": "Change password successfully",
+    "Reset_Password": "Reset password successfully",
+    "accounts": {
+      "delete": "Account %0 is deleted",
+      "Send_Mail_Created": "Account %0 is created. Login information have been sent to email address %1."
+    },
+    "deploy": "Deploy successfully",
+    "unDeploy": "Undeploy successfully",
+    "Export_Excel": "Successfully exported excel file",
+    "Set_Wifi": "Successful. The device will automatically reboot after 10 seconds"
+  },
+  "Load_Lists_Errors": {
+    "general": "Load lists failed: %0",
+    "user": "Load users failed: %0",
+    "agency": "Load agencies failed: %0",
+    "company": "Load companies failed: %0",
+    "customer": "Load customers failed: %0",
+    "area": "Load areas failed: %0",
+    "ooh": "Load ooh locations failed: %0",
+    "group": "Load groups failed: %0",
+    "device": "Load players failed: %0",
+    "playlist": "Load playlists failed: %0",
+    "asset": "Load assets failed: %0",
+    "label": "Load labels failed: %0"
+  },
+  "Found_Errors": {
+    "general": "Find items failed: %0",
+    "user": "Find users failed: %0",
+    "agency": "Find areas failed: %0",
+    "company": "Find companies failed: %0",
+    "customer": "Find customers failed: %0",
+    "area": "Find areas failed: %0",
+    "ooh": "Find ooh locations failed: %0",
+    "group": "Find groups failed: %0",
+    "device": "Find players failed: %0",
+    "playlist": "Find playlists failed: %0",
+    "asset": "Find assets failed: %0",
+    "label": "Find labels failed: %0"
+  },
+  "Exists": {
+    "general": "Item %0 is already existed.",
+    "user": "User %0 is already existed.",
+    "agency": "Agency %0 is already existed.",
+    "company": "Company %0 is already existed.",
+    "customer": "Customer %0 is already existed.",
+    "area": "Area %0 is already existed.",
+    "ooh": "Location %0 is already existed.",
+    "group": "Group %0 is already existed.",
+    "playlist": "Playlist %0 is already existed.",
+    "asset": "Asset %0 is already existed.",
+    "label": "Label %0 is already existed."
+  },
+  "Not_Exists": {
+    "general": "Item %0 does not exist or has been deleted.",
+    "user": "User %0 does not exist.",
+    "agency": "Agency %0 does not exist.",
+    "company": "Company %0 does not exist.",
+    "customer": "Customer %0 does not exist.",
+    "area": "Area %0 does not exist.",
+    "ooh": "Location %0 does not exist.",
+    "group": "Group %0 does not exist.",
+    "device": "Device %0 does not exist.",
+    "playlist": "Playlist %0 does not exist.",
+    "asset": "Asset %0 does not exist.",
+    "label": "Label %0 does not exist."
+  },
+  "Not_Founds": {
+    "general": "Item %0 is not found or has been deleted.",
+    "Request_Object": "Invalid request. Object is required."
+  },
+  "Required": {
+    "general": "This field is required"
+  },
+  "Unique": {
+    "area": {
+      "code": "Area code %0 is already taken. Please enter another value."
+    },
+    "company": {
+      "code": "Company code %0 is already taken. Please enter another value."
+    },
+    "agency": {
+      "code": "Agency code %0 is already taken. Please enter another value."
+    },
+    "customer": {
+      "code": "Customer code %0 is already taken. Please enter another value."
+    },
+    "label": {
+      "name": "Label %0 is already taken. Please enter another value."
+    },
+    "user": {
+      "code": "User code %0 is already taken. Please enter another value.",
+      "email": "Email %0 is already taken. Please enter another value."
+    }
+  },
+  "SendMail": {
+    "Title_No_Content": "%0 Warning! Device does not play content",
+    "Title_On_Offline": "%0 Warning! Device status is online/offline",
+    "Notify_No_Content": "Device %0 playing nothing.",
+    "Notify_Offline": "Device %0 is disconnected from the system.",
+    "Notify_Online": "Device %0 is connected to the system."
+  },
+  "DayInWeek": {
+    "monday": "Mon",
+    "tuesday": "Tue",
+    "wednesday": "Wed",
+    "thursday": "Thu",
+    "friday": "Fri",
+    "saturday": "Sat",
+    "sunday": "Sun"
+  },
+  "Roles": {
+    "admin": "Admin",
+    "maker": "Maker",
+    "checker": "Checker",
+    "streamer": "Streamer",
+    "customer": "Customer",
+    "agency": "Agency"
+  }
+}

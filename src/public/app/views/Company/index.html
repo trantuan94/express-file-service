@@ -1,0 +1,59 @@
+<div class="row height100 overflow-auto">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title flex-content">
+                <span class="flex-item-vertial">Danh sách khách hàng</span>
+                <div class="btn-toolbar btn-group-sm flex-item-right">
+                    <a ng-click="fn.add()" class="btn btn-primary">
+                        <em><i class="fa fa-plus"></i> Thêm mới khách hàng</em>
+                    </a>
+                </div>
+            </h3>
+        </div>
+
+        <div class="panel-body">
+            <!--            <table ng-table="tableParams" show-filter="true" class="table table-bordered table-striped" template-pagination="custom/pager">-->
+            <table ng-table="tableParams" show-filter="true" class="table table-bordered table-striped">
+                <tr ng-repeat="row in $data">
+                    <td title="'STT'" title-alt="'STT'" class="td_center">
+                        <small class="text-info truncate">{{$index + 1}}</small>
+                    </td>
+                    <td title="'Tên công ty'" sortable="'name'" filter="{name: 'text'}">
+                        <small class="text-body truncate">{{row.name}}</small>
+                    </td>
+                    <td title="'Địa chỉ'" sortable="'address'" filter="{address: 'text'}">
+                        <small class="text-body truncate">{{row.address}}</small>
+                    </td>
+                    <td title="'Số điện thoại'" sortable="'phone'" filter="{phone: 'text'}">
+                        <small class="text-primary truncate">{{row.phone}}</small>
+                    </td>
+                    <td title="'Không gian lưu trữ'" sortable="'storageConfig.capacity'"
+                        filter="{'storageConfig.capacity': 'text'}">
+                        <small class="text-info truncate">{{row.storageConfig.capacity}}</small>
+                    </td>
+                    <td title="'Ngày tạo'" sortable="'insert.when'" filter="{'insert.when': 'daterange'}"
+                        class="td_center">
+                        <small class="text-danger truncate">{{row.insert.when | date:'dd - MM - yyyy'}}</small>
+                    </td>
+                    <td title="'Hành động'" class="td_center">
+                        <button ng-click="$event.stopPropagation();fn.edit(row)" class="btn btn-sm btn-warning">
+                            <i class="fa fa-edit"></i> Sửa
+                        </button>
+
+                        <button ng-click="$event.stopPropagation();fn.delete(row)"
+                                style="margin-top: 5px" class="btn btn-sm btn-danger">
+                            <i class="fa fa-times-circle"></i> Xóa
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="ng-table/filters/daterange.html">
+    <form class="form-inline">
+        <input class="form-control" format="yyyy-mm-dd" type="date" ng-model="params.filter()['insert.when']"/>
+    </form>
+</script>

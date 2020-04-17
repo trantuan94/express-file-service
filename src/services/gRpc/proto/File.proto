@@ -1,0 +1,18 @@
+syntax = 'proto3';
+
+message Empty {}
+message Subject {
+    string _id = 1;
+    string name = 2;
+}
+message Request {
+    string options = 1;
+    string methodName = 2;
+}
+message Response {
+    string msg = 1;
+}
+
+service FileService {
+    rpc fetch (Request) returns (Response) {}
+}

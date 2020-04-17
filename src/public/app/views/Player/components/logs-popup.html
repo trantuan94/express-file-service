@@ -1,0 +1,68 @@
+<div class="modal-header">
+    <h3 class="text-warning">{{titleModalLog}}
+        <a ng-click="popupLogs.closeModal()" class="pull-right close">×</a>
+    </h3>
+</div>
+
+<div class="modal-body max-80vh min-40vh">
+    <div class="row">
+        <div class="col-sm-12 col-md-5">
+            <div class="form-group row">
+                <label class="control-label col-sm-5">TG bắt đầu</label>
+                <div class="col-sm-7">
+                    <input type="date" ng-model="historiesFilter.start" class="form-control"
+                        ng-change="popupLogs.onSearch()"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-5">
+            <div class="form-group row">
+                <label class="control-label col-sm-5">TG kết thúc</label>
+                <div class="col-sm-7">
+                    <input type="date" ng-model="historiesFilter.end" class="form-control" 
+                        ng-change="popupLogs.onSearch()"/>
+                </div>
+            </div>
+        </div>
+        <div class="cod-sm-12 col-md-2">
+            <button class="btn btn-success w-100" ng-click="popupLogs.exportFile()">
+                <i class='fa fa-file-excel'></i> Xuất lịch sử
+            </button>
+        </div>
+    </div>
+    <div ng-if="popupLogs.logMsg" class="row">
+        <div class="col-sm-12">
+            <span
+                ng-class="popupLogs.logMsg.type === 'error' ? 'text-danger' : 'text-success'" 
+            >
+                {{popupLogs.logMsg.msg}}
+            </span>
+        </div>
+    </div>
+
+    <table ng-table="tableParamsModal" show-filter="true" class="table table-bordered table-striped">
+        <tr ng-repeat="row in $data">
+            <td title="'STT'" title-alt="'STT'" class="td_center">
+                <small class="text-info truncate">{{$index + 1}}</small>
+            </td>
+
+            <td title="'Ngày tháng'" sortable="'date'" filter="{date: 'daterange'}">
+                <small class="text-body truncate">{{row.date | date: 'dd/MM/yyyy'}}</small>
+            </td>
+
+            <td title="'Thời gian'" sortable="'time'" filter="{time: 'text'}">
+                <small class="text-body truncate">{{row.time}}</small>
+            </td>
+
+            <td title="'Trạng thái'" sortable="'type'" filter="{type: 'options'}">
+                <small class="text-info truncate">{{row.type}}</small>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/ng-template" id="ng-table/filters/daterange.html">
+    <form class="form-inline">
+        <input class="form-control" format="yyyy-mm-dd" type="date" ng-model="params.filter()['date']"/>
+    </form>
+</script>

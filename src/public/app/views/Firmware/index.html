@@ -1,0 +1,47 @@
+<div class="row height100 overflow-auto">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title flex-content">
+                <span class="flex-item-vertial">Danh sách tệp tin</span>
+                <div class="flex-item-right">
+                    <nodeims-file-upload
+                            class="btn btn-sm"
+                            multiple="false"
+                            max-files="1"
+                            post-path="{{upload.url}}"
+                            onstart="upload.onstart()"
+                            onprogress="upload.onprogress(percentDone)"
+                            onerror="upload.onerror(files, type, msg)"
+                            ondone="upload.ondone(files, data, status)"
+                    >
+                        <em class="btn btn-sm btn-primary"><i class="fa fa-upload"></i> Upload Firmware</em>
+                    </nodeims-file-upload>
+                </div>
+            </h3>
+        </div>
+
+        <div class="panel-body">
+            <table ng-table="tableParams" show-filter="true" class="table table-bordered table-striped">
+                <tr ng-repeat="row in $data">
+                    <td title="'STT'" title-alt="'STT'" class="td_center">
+                        <small class="text-info truncate">{{$index + 1}}</small>
+                    </td>
+                    <td title="'Tên tệp tin'" sortable="'file'" filter="{file: 'text'}">
+                        <small class="text-body truncate">{{row.file}}</small>
+                    </td>
+                    <td title="'Kích thước'" sortable="'size'" filter="{size: 'text'}">
+                        <small class="text-primary truncate">{{row.size}}</small>
+                    </td>
+                    <td title="'Thời gian cập nhật'" sortable="'lastModifiedTime'" filter="{'lastModifiedTime': 'text'}" class="td_center">
+                        <small class="text-danger truncate">{{row.lastModifiedTime | date:'yyyy-MM-dd HH:mm:ss'}}</small>
+                    </td>
+                    <td title="'Hành động'" class="td_center">
+                        <button ng-click="$event.stopPropagation();fn.delete(row)" class="btn btn-sm btn-danger">
+                            <i class="fa fa-times-circle"></i> Xóa
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

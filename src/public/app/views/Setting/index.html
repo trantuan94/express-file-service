@@ -1,0 +1,164 @@
+<div class="row height100 overflow-auto">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Thiết lập cài đặt</h3>
+        </div>
+
+        <div class="panel-body">
+            <form role="form" name="settingsForm" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-xs-4 control-label">Thiết lập Email nhận thông báo</label>
+                    <div class="col-xs-4">
+                        <div class="input-group">
+                            <input type="text" name="receivedNotifyMail" ng-model="settings.receivedNotifyMail"
+                                   required="" class="form-control"/>
+                            <span class="input-group-btn">
+                                <a type="button" class="btn btn-success"
+                                   ng-click="saveSettings()"
+                                   ng-disabled="!settingsForm.receivedNotifyMail.$dirty"
+                                >
+                                  Lưu
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="form-group">
+                  <label class="col-xs-4 control-label">SSH Password</label>
+                  <div class="col-xs-4">
+                    <input type="password" name="sshPassword" ng-model="settings.sshPassword" class="form-control"/>
+                  </div>
+                  <div class="col-xs-2">
+                    <button type="submit" ng-click="saveSettings()" class="btn btn-success"> Save</button>
+                  </div>
+                </div>-->
+
+                <div class="form-group">
+                    <label class="col-xs-4 control-label">Thời lượng mặc định cho các slide</label>
+                    <div class="col-xs-4">
+                        <div class="input-group">
+                            <input type="text" name="duration" ng-model="settings.defaultDuration" required=""
+                                   class="form-control"/>
+                            <span class="input-group-btn">
+                                <a type="button" class="btn btn-success"
+                                   ng-click="saveSettings()"
+                                   ng-disabled="!settingsForm.duration.$dirty"
+                                >
+                                  Lưu
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+<!--                <div class="form-group">-->
+<!--                    <div class="checkbox">-->
+<!--                        <label class="col-xs-8 col-xs-offset-4">-->
+<!--                            <input type="checkbox" name="youtubedl" ng-model="settings.enableYoutubeDl"-->
+<!--                                   ng-change="saveSettings()"/>-->
+<!--                            <span>Sử dụng chương trình youtube-dl để phát trực tiếp thay vì livestreamer</span>-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label class="col-xs-8 col-xs-offset-4">
+                            <input type="checkbox" name="forcetvon" ng-model="settings.forceTvOn"
+                                   ng-click="saveSettings()"/>
+                            <span>Giữ TV hiển thị bằng cách gửi tin nhắn bật / tắt TV CEC cứ sau 3 phút</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label class="col-xs-8 col-xs-offset-4">
+                            <input type="checkbox" name="systemshow" ng-model="settings.systemMessagesHide"
+                                   ng-click="saveSettings()"/>
+                            <span>Ẩn tin nhắn hệ thống trên Màn hình TV (ví dụ: Đang tải xuống)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label class="col-xs-8 col-xs-offset-4">
+                            <input type="checkbox" name="hidenotice" ng-model="settings.hideWelcomeNotice"
+                                   ng-change="saveSettings()"/>
+                            <span>Không hiển thị màn hình chào mừng</span>
+                        </label>
+                    </div>
+                </div>
+
+<!--                <div class="form-group">-->
+<!--                    <div class="checkbox">-->
+<!--                        <label class="col-xs-8 col-xs-offset-4">-->
+<!--                            <input type="checkbox" name="logs" ng-model="settings.enableLog"-->
+<!--                                   ng-change="saveSettings()"/>-->
+<!--                            <span class="text-warning">-->
+<!--                                Enable log for file play count/details (network intensive, do not enable unless you need it!)-->
+<!--                            </span>-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="form-group">-->
+<!--                    <div class="checkbox">-->
+<!--                        <label class="col-xs-8 col-xs-offset-4">-->
+<!--                            <input type="checkbox" id="log" name="checkbox" ng-model="settings.assetLogEnable"-->
+<!--                                   ng-change="saveSettings()"/>-->
+<!--                            <span>Enable Log for Files Play Statistics</span>-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="form-group">-->
+<!--                    <div class="checkbox">-->
+<!--                        <label class="col-xs-8 col-xs-offset-4">-->
+<!--                            <input type="checkbox" id="layout" name="checkbox" ng-model="settings.newLayoutsEnable"-->
+<!--                                   ng-change="saveSettings()"/>-->
+<!--                            <span>Enable new Layouts 3c,3d,4c,4d</span>-->
+<!--                            <br/>-->
+<!--                            <strong class="text-danger">-->
+<!--                                WARNING: ALL players in the GROUP should be of version >= 1.2.2-->
+<!--                            </strong>-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </form>
+
+            <!--<hr/>
+            <h3 class="panel-title">Set Username and Password for Download Access</h3>
+            <hr/>
+
+            <form role="form" name="downloadAccessForm" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-xs-4 control-label">Username</label>
+                    <div class="col-xs-4">
+                        <input type="text" name="user" ng-model="settings.authCredentials.user" required="" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-4 control-label">Password</label>
+                    <div class="col-xs-4">
+                        <input type="password" name="password" ng-model="settings.authCredentials.password" required="" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-4 col-xs-offset-4">
+                        <button type="submit" class="btn btn-success"
+                                ng-click="saveSettings()"
+                                ng-disabled="downloadAccessForm.$invalid"
+                        >
+                            Lưu
+                        </button>
+                    </div>
+                </div>
+            </form>-->
+        </div>
+    </div>
+</div>

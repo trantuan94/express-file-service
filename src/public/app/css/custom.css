@@ -1,0 +1,283 @@
+html {
+    height: 100%;
+}
+
+body {
+    /*max-width: 1280px;*/
+    margin: auto;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    height: 100%;
+}
+
+.height100 {
+    height: 100%;
+    padding-left: 0;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.overflow-auto {
+    overflow: auto;
+}
+
+.letter-box {
+    width: 64px;
+    height: 64px;
+    background: lightskyblue;
+    text-align: center;
+    font-size: 32px;
+    line-height: 64px;
+    color: #f8f8ff;
+    text-decoration: none !important;
+}
+
+.select-xs {
+    height: 20px;
+    padding: 2px 2px;
+    font-size: 10px;
+    line-height: 1.5;
+    border-radius: 2px;
+}
+
+.media-object {
+    max-height: 64px;
+}
+
+.subtle-text {
+    color: #b8b8b8 !important;
+}
+
+.categories {
+    max-height: 300px;
+    overflow: auto;
+}
+
+.drop-notification {
+    position: fixed;
+    z-index: 10;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #111;
+    color: #fff;
+    padding: 30px;
+}
+
+.dim {
+    opacity: 0.5;
+}
+
+body .modal-body {
+    max-height: 1500px;
+}
+
+.modal-content > .panel {
+    margin-bottom: 0px;
+}
+
+.group-multiselect {
+    width: 160px;
+    font-size: 12px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.text-lightyellow {
+    color: lightyellow;
+}
+
+.text-lightgreen {
+    color: lightgreen;
+}
+
+.pl-5 {
+    padding-left: 5px;
+}
+
+.pl-10 {
+    padding-left: 10px;
+}
+
+.pr-5 {
+    padding-right: 5px;
+}
+
+.pr-10 {
+    padding-right: 10px;
+}
+
+.landscape {
+    max-height: 988px;
+    max-width: 468px;
+}
+
+.portrait {
+    max-height: 468px;
+    max-width: 988px;
+    transform: rotate(-90deg);
+}
+
+.portrait270 {
+    max-height: 468px;
+    max-width: 988px;
+    transform: rotate(90deg);
+}
+
+div [ui-view ='left'], div [ui-view ='left2'], div [ui-view ='right'], div [ui-view ='list'], div [ui-view ='details'] {
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 0;
+}
+
+div.formChangePw {
+    padding-top: 100px;
+    padding-right: 200px;
+    padding-left: 200px;
+}
+
+.dropdown-labels ul {
+    position: fixed;
+    top: 130px;
+    left: auto;
+    right: 0;
+    height: 300px !important;
+}
+
+.layout_playlist label {
+    width: 40%;
+}
+
+.layout_playlist .input {
+    width: 60%;
+}
+
+@media (max-width: 1350px) {
+    .layout_playlist label {
+        width: 100%;
+        text-align: left !important;
+    }
+
+    .layout_playlist .input {
+        width: 100%;
+        text-align: left !important;
+    }
+}
+
+@media (min-width: 1350px) {
+    .modal-stream .modal-dialog {
+        width: 705px;
+    }
+}
+
+.td_center {
+    text-align: center
+}
+
+div.ng-scope.ng-isolate-scope {
+    margin-top: 8px;
+}
+
+.panel-body {
+    padding: 8px !important;
+}
+
+.panel-info {
+    overflow: hidden;
+    min-height: calc(100vh - 76px);
+}
+
+table th span.sort-indicator {
+    display: inline-block;
+}
+
+.flex-content {
+    display: flex;
+}
+
+.flex-content .flex-item-vertial {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.flex-content .flex-item-right {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+table.table-mq {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.table-mq td,
+table.table-mq th {
+    border: 1px solid #dddddd;
+    padding: 8px 16px;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #eee;
+}
+
+.clear-float{
+    clear: both;
+    float: none !important;
+}
+
+.min-height-0 {
+    min-height: 0 !important;
+}
+
+.main-content-selected-playlist {
+    min-height: calc(100vh - 312px);
+}
+
+.navbar-sidebar li a {
+    font-size: 15px !important;
+}
+
+/* spinner */
+.spinner {
+    display: inline-block;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% {transform: rotate(369deg); }
+}
+
+.mt-1 { margin-top: 0.75rem; }
+
+.w-100 { width: 100%; }
+
+.mb-3 { margin-bottom: 3px; }
+
+.mt-3 { margin-top: 3px; }
+
+.max-80vh {
+    overflow: auto;
+    max-height: 80vh !important;
+}
+
+.min-40vh {
+    overflow: auto;
+    min-height: 40vh !important;
+}

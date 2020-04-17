@@ -1,0 +1,200 @@
+<div class="panel panel-info" ng-class="group.selectedGroup ? 'min-height-0' : ''">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-sm-3">
+                <h3 class="panel-title" style="margin-top: 5px">Danh sách thiết bị</h3>
+            </div>
+
+            <div class="col-sm-2">
+                <input type="text" placeholder="Lọc" ng-model="filters.valueSearch" class="form-control"/>
+            </div>
+
+            <div class="col-sm-3" style="margin-top: 3px" ng-if="player.players.length!=0">
+                <span class="text-danger pull-left">Offline: {{player.numberOffline}}</span>
+
+                <span class="text-success pull-right">Online: {{player.numberOnline}}</span>
+            </div>
+
+            <div class="col-sm-2">
+                <div ng-init="alphabetical=false" class="btn-group btn-group-sm pull-right">
+                    <button ng-click="alphabetical=false" class="fa fa-clock-o fa-lg text-muted btn btn-info"></button>
+                    <button ng-click="alphabetical=true" class="fa fa-sort-alpha-asc fa-lg text-muted btn btn-info">
+
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <span ng-attr-title="Nhấn vào nút này để chọn, chỉnh sửa và thêm nhãn" class="btn-group pull-right">
+                    <button ng-click="loadCategory()" class="btn btn-info btn-sm">
+                        <i class="fa fa-tags">&nbsp;</i><span>{{label.selectedPlayerLabel.trunc(10) || "Nhãn"}}</span>
+                    </button>
+
+                    <button ng-show="label.selectedPlayerLabel" ng-click="clearCategory()" class="btn btn-info btn-sm">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <ul class="list-group">
+        <li ng-show="player.players.length!=0"
+            ng-repeat="item in player.players | filter:labelFilter | filter:filters.search | orderBy:(alphabetical? &quot;name&quot;:&quot;lastReported&quot;):(alphabetical?false:true)"
+            class="list-group-item">
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <div>
+                        <h6 ng-show="!nameEdit" class="truncate"
+                            ng-class="item.licensed ? 'text-primary' : 'text-warning'">
+
+                            <!-- <span ng-click="nameEdit=true;"> -->
+                            <span>
+                                {{item.name || item.localName || ("Player "+item.cpuSerialNumber.slice(12))}}
+                            </span>
+
+                            <!-- <button ng-click="shellCommand(item)" class="btn btn-link btn-xs pull-right">
+                                <i class="fa fa-lg fa-terminal fa-border bg-info"></i>
+                            </button> -->
+                        </h6>
+                    </div>
+
+                    <!-- <div ng-show="nameEdit" class="input-group">
+                        <input type="text" ng-model="item.name" class="input-sm form-control"/>
+                        <div class="input-group-btn">
+                            <button ng-click="saveName(item);nameEdit=false;" class="btn btn-sm btn-success">
+                                <i class="fa fa fa-check"></i>
+                            </button>
+                        </div>
+                    </div> -->
+                </div>
+
+                <div class="col-sm-3">
+                    <div popover-placement="right" popover="{{item.ethMac + '/' + item.wifiMac}}">
+                        <small class="text-primary truncate"> {{item.myIpAddress || "IP:NA"}}</small>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="row" ng-if="authUser.role == 'checker'">
+                        <div class="col-sm-12">
+                            <small class="text-primary">
+                                {{item.company ? (item.company.name +
+                                (item.group ? (' | ' + (item.group.name.length > 22 ? item.group.name.slice(0,20) +
+                                '..' : item.group.name)) : ''))
+                                : (item.group ? (item.group.name.length > 22 ? item.group.name.slice(0,20) + '..' :
+                                item.group.name) : '')
+                                }}
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="row" ng-if="authUser.role != 'checker'">
+                        <div class="col-sm-8">
+                            <small class="text-primary">
+                                {{item.company ? (item.company.name +
+                                (item.group ? (' | ' + (item.group.name.length > 22 ? item.group.name.slice(0,20) +
+                                '..' : item.group.name)) : ''))
+                                : (item.group ? (item.group.name.length > 22 ? item.group.name.slice(0,20) + '..' :
+                                item.group.name) : '')
+                                }}
+                            </small>
+                        </div>
+
+                        <div class="col-sm-4" ng-if="authUser.role == 'maker'">
+                            <button ng-click="loadPlayerDetails(item)" class="btn btn-default btn-xs pull-right">
+                                <i class="fa fa-cog fa-lg text-warning"></i>
+                            </button>
+                        </div>
+
+                        <div class="col-sm-4" ng-if="authUser.role != 'maker'">
+                            <!-- <button ng-click="swUpdate(item)"
+                                    class="btn btn-warning btn-xs pull-right" style="overflow:auto; margin-left:5px"
+                                    ng-if="player.currentVersion.version && item.version != player.currentVersion.version">
+                                <i class="fa fa-arrow-circle-up"></i>
+                            </button>
+
+                            <button ng-click="loadPlayerDetails(item)" class="btn btn-default btn-xs pull-right">
+                                <i class="fa fa-cog fa-lg text-warning"></i>
+                            </button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <h6 class="text-primary">
+                        <small>
+                            {{item.cpuSerialNumber}}
+                            <small title="player on since" class="text-info pl-5">{{item.uptimeFormatted }}</small>
+                            <small title="cpu temperature" class="text-info pl-5">{{item.piTemperature}}</small>
+                            <small title="disk space available" class="text-info pl-5">
+                                {{item.diskSpaceAvailable}}
+                            </small>
+                        </small>
+                    </h6>
+
+                    <h6 class="text-primary truncate">
+                        <small>ver:&nbsp;{{item.version}}/{{item.platform_version}}</small>
+                    </h6>
+                </div>
+
+                <div class="col-sm-3" ng-if="authUser.role == 'checker'">
+                    <input ng-model="item.TZ" disabled class="form-control select-xs"/>
+                </div>
+
+                <div class="col-sm-3" ng-if="authUser.role != 'checker'">
+                    <select ng-model="item.TZ" ng-change="changeTZ(item)" ng-options="tz for tz in tzNames"
+                            class="form-control select-xs" disabled>
+                        <option value="" selected="selected">--No TZ--</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h6>
+                                <i ng-class="item.statusClass"
+                                   title="{{item.isConnected?(item.playlistOn?'online &amp; playing, tv-on:'+item.tvStatus:'online &amp; not playing, tv-on:'+item.tvStatus):'offline'}}"
+                                   class="fa fa-circle fa-lg">
+                                </i>
+                                <a class="text-primary" ng-if="authUser.role == 'checker'">{{item.currentPlaylist}}</a>
+                                <a ng-click="gotoPlaylist(item.currentPlaylist)" ng-if="authUser.role != 'checker'">
+                                    {{item.currentPlaylist}}
+                                </a>
+                            </h6>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h6 ng-if="!item.isConnected || !item.syncInProgress" class="text-primary truncate">
+                                <small>
+                                    last sync:&nbsp;{{item.lastUpload?(item.lastUpload | timeAgo):"never"}}
+                                </small>
+                            </h6>
+
+                            <h6 ng-if="item.isConnected &amp;&amp; item.syncInProgress" class="text-primary">
+                                <i class="fa fa-spinner fa-spin"></i>
+                                <small class="truncate">&nbsp;{{item.wgetBytes }} {{item.wgetSpeed }}B/sec</small>
+                            </h6>
+                        </div>
+
+                        <!-- <div class="col-sm-6">
+                            <h6 class="text-primary truncate pull-right">
+                                <small>
+                                    last seen:&nbsp;{{item.lastReported?(item.lastReported | timeAgo):"never"}}
+                                </small>
+                            </h6>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        <li ng-show="player.players.length == 0" class="list-group-item list-group-item">Không có thiết bị</li>
+    </ul>
+</div>
+

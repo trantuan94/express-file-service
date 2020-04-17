@@ -1,0 +1,163 @@
+<div class="row height100 overflow-auto">
+    <div class="panel panel-info" ng-class="group.selectedGroup ? 'min-height-0' : ''">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h3 class="panel-title" style="margin-top: 5px">Danh sách thiết bị</h3>
+                </div>
+
+<!--                <div class="col-sm-3" style="margin-top: 3px" ng-if="player.players.length!=0">-->
+<!--                    <span class="text-danger pull-left">Offline: {{player.numberOffline}}</span>-->
+
+<!--                    <span class="text-success pull-right">Online: {{player.numberOnline}}</span>-->
+<!--                </div>-->
+
+<!--                <div class="col-sm-2">-->
+<!--                <span ng-attr-title="Nhấn vào nút này để chọn, chỉnh sửa và thêm nhãn" class="btn-group pull-right">-->
+<!--                    <button ng-click="loadCategory()" class="btn btn-info btn-sm">-->
+<!--                        <i class="fa fa-tags">&nbsp;</i><span>{{label.selectedPlayerLabel.trunc(10) || "Nhãn"}}</span>-->
+<!--                    </button>-->
+
+<!--                    <button ng-show="label.selectedPlayerLabel" ng-click="clearCategory()" class="btn btn-info btn-sm">-->
+<!--                        <i class="fa fa-close"></i>-->
+<!--                    </button>-->
+<!--                </span>-->
+<!--                </div>-->
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <table ng-table="tableParams" show-filter="true" class="table table-bordered table-striped">
+                <tr ng-repeat="row in $data">
+                    <td title="'STT'" title-alt="'STT'" class="td_center">
+                        <small class="text-info truncate">{{$index + 1}}</small>
+                    </td>
+
+                    <td title="'Tên thiết bị'" sortable="'name'" filter="{name: 'text'}">
+                        <div>
+                            <div>
+                                <h6 ng-show="!nameEdit" class="truncate" ng-class="row.licensed ? 'text-primary' : 'text-warning'">
+                                    <span ng-click="nameEdit=true;">
+                                        {{row.name || row.localName || ("Player "+row.cpuSerialNumber.slice(12))}}
+                                    </span>
+                                </h6>
+                            </div>
+                            
+                            <div ng-show="nameEdit" class="input-group">
+                                <input type="text" ng-model="row.name" class="input-sm form-control" />
+                                <div class="input-group-btn">
+                                    <button ng-click="saveName(row);nameEdit=false;" class="btn btn-sm btn-success">
+                                        <i class="fa fa fa-check"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h6 class="text-primary">
+                                <small>
+                                    {{row.cpuSerialNumber}}
+                                    <small title="player on since" class="text-info pl-5">{{row.uptimeFormatted }}</small>
+                                    <small title="cpu temperature" class="text-info pl-5">{{row.piTemperature}}</small>
+                                    <small title="disk space available" class="text-info pl-5">
+                                        {{row.diskSpaceAvailable}}
+                                    </small>
+                                </small>
+                            </h6>
+    
+                            <h6 class="text-primary truncate">
+                                <small>ver:&nbsp;{{row.version}}/{{row.platform_version.slice(0,20) + '...'}}</small>
+                            </h6>
+                        </div>
+                    </td>
+
+                    <td title="'Địa chỉ'" sortable="'location'" filter="{location: 'text'}">
+                        <small class="text-primary truncate"> {{row.location}}</small>
+                    </td>
+                    
+                    <td title="'Địa chỉ IP'" sortable="'myIpAddress'" filter="{myIpAddress: 'text'}">
+                        <div popover-placement="right" popover="{{row.ethMac + '/' + row.wifiMac}}">
+                            <small class="text-primary truncate"> {{row.myIpAddress || "IP:NA"}}</small>
+                        </div>
+                        <select ng-model="row.TZ" ng-change="changeTZ(row)" ng-options="tz for tz in tzNames"
+                                class="form-control select-xs">
+                            <option value="" selected="selected">--No TZ--</option>
+                        </select>
+                    </td>
+
+                    <td title="'Trạng thái'" sortable="'isConnected'" filter="{isConnected: 'statusBoolean'}"
+                        class="td_center">
+                        <small>
+                            <i ng-class="row.status.class" title="{{row.status.title}}" class="fa fa-circle fa-lg"></i>
+                        </small>
+                    </td>
+
+                    <td title="'Nhóm thiết bị'" sortable="'group.name'" filter="{'group.name': 'text'}">
+                        <div>
+                            <small class="text-primary">
+                                {{row.company ? (row.company.name +
+                                (row.group ? (' | ' + (row.group.name.length > 22 ? row.group.name.slice(0,20) +
+                                '..' : row.group.name)) : ''))
+                                : (row.group ? (row.group.name.length > 22 ? row.group.name.slice(0,20) + '..' :
+                                row.group.name) : '')
+                                }}
+                            </small>
+                        </div>
+
+                        <small class="truncate" ng-class="row.classReport">
+                            <small>
+                                last seen:&nbsp;{{row.lastReported ? (row.lastReported | timeAgo) : "never"}}
+                            </small>
+                        </small>
+                    </td>
+
+                    <td title="'Nội dung đang phát'" sortable="'currentPlaylist'" filter="{currentPlaylist: 'text'}">
+                        <small class="text-body truncate">{{row.currentPlaylist}}</small>
+                        <br/>
+                        <small ng-if="!row.isConnected || !row.syncInProgress" class="text-primary truncate">
+                            <small>
+                                last sync:&nbsp;{{row.lastUpload ? (row.lastUpload | timeAgo) : "never"}}
+                            </small>
+                        </small>
+
+                        <small ng-if="row.isConnected &amp;&amp; row.syncInProgress" class="text-primary">
+                            <i class="fa fa-spinner fa-spin"></i>
+                            <small class="truncate">&nbsp;{{row.wgetBytes }} {{row.wgetSpeed }}B/sec</small>
+                        </small>
+                    </td>
+
+                    <td title="'Hành động'" class="td_center">
+                        <div class="btn-group-vertical" role="group">
+                            <button ng-click="shellCommand(row)" class="btn btn-default btn-xs">
+                                <i class="fa fa-lg fa-terminal fa-border bg-info"></i>
+                            </button>
+
+                            <button 
+                                ng-click="loadPlayerDetails(row)" 
+                                class="btn btn-default btn-xs"
+                                style="margin-top: 3px; margin-bottom: 3px;"    
+                            >
+                                <i class="fa fa-cog fa-lg text-warning"></i>
+                            </button>
+    
+                            <button ng-click="swUpdate(row)" class="btn btn-warning btn-xs"
+                                    ng-if="currentVersion.version && row.version != currentVersion.version"
+                            >
+                                <i class="fa fa-arrow-circle-up"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="ng-table/filters/statusBoolean.html">
+    <form class="form-inline">
+        <select class="form-control" ng-model="params.filter()['isConnected']">
+            <option value="">All</option>
+            <option value="true">Online</option>
+            <option value="false">Offline</option>
+        </select>
+    </form>
+</script>

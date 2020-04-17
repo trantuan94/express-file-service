@@ -1,0 +1,39 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="panel-title">Triển khai nhóm phát</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <ul ng-show="group.groups.length > 0" class="nav nav-pills nav-stacked">
+            <li ng-repeat="item in group.groups" ng-class="fn.getClass(item)">
+                <a ng-click="fn.selected(item)">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <small>{{ item.name }}</small>
+                        </div>
+
+                        <!--<div class="col-sm-4">-->
+                            <!--<button ng-click="$event.stopPropagation(); approveItem(item);" style="width: 75px" class="btn btn-primary btn-sm">-->
+                                <!--Approve-->
+                            <!--</button>-->
+
+                            <!--<button ng-click="$event.stopPropagation(); cancelItem(item);" style="width: 75px; margin-top: 3px" class="btn btn-warning btn-sm">-->
+                                <!--<i class="fa fa-reply"></i> Cancel-->
+                            <!--</button>-->
+                        <!--</div>-->
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div ng-show="group.groups.length > 0" class="input-group col-xs-12">
+        <button ng-click="globalSync()" class="btn btn-success btn-block">Phê duyệt tất cả</button>
+    </div>
+</div>
+
+<div ng-show="group.groups.length === 0" class="list-group-item list-group-item">Không có danh sách triển khai</div>

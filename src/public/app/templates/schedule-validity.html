@@ -1,0 +1,33 @@
+
+<div class="modal-content">
+  <div class="modal-header bg-default">
+    <button ng-click="scheduleValidityModal.close()" class="close">&times;</button>
+    <h3 class="text-warning"><span class="pr-5 text-muted"> Thêm thời gian hiệu lực cho nội dung:</span>{{forAsset.fileDetails.name}}</h3>
+  </div>
+  <div class="modal-body">
+    <form role="form" id="schedulecal" name="schedulecal">
+      <div class="form-group"><label><span class="help-block">Bạn có thể thêm thời hạn hiệu lực cho một nội dung được hiển thị trên màn hình</span></label></div>
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="forAsset.fileDetails.validity.enable"/><span>Thêm thời hạn hiệu lực</span>
+          </label>
+        </div>
+      </div>
+      <div ng-show="forAsset.fileDetails.validity.enable" class="form-group row">
+        <label class="col-sm-3 control-label">Có hiệu lực từ</label>
+        <div class="col-sm-4">
+          <input type="date" ng-model="forAsset.fileDetails.validity.startdate" ng-model-options="{timezone:'UTC'}" placeholder="{{'Starting on' }}" name="startdate" ng-attr-title="{{&quot;Enter Start Date&quot; }}" class="form-control input-sm"/>
+        </div>
+        <label class="col-sm-1 control-label text-right">đến</label>
+        <div class="col-sm-4">
+          <input type="date" ng-model="forAsset.fileDetails.validity.enddate" ng-model-options="{timezone:'UTC'}" placeholder="Till date" name="enddate" title="{{&quot;Enter End Date&quot;}}" class="form-control input-sm"/>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" ng-click="scheduleValidityModal.close()" class="btn btn-default">Hủy</button>
+    <button ng-click="saveValidity()" class="btn btn-primary">Lưu</button>
+  </div>
+</div>

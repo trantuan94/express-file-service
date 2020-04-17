@@ -1,0 +1,512 @@
+<!-- <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i></button><a href="#" target="_self" class="navbar-brand"><img src="app/img/mqlogo.png" height="32px"/></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul style="margin-left:20px;" class="nav navbar-nav">
+        <li ng-class="getClass('home.assets')"><a ui-sref="home.assets.main" ui-sref-opts="{reload: true}">Assets</a></li>
+        <li ng-class="getClass('home.players')"><a ui-sref="home.players.players" ui-sref-opts="{reload: true}">Players</a></li>
+        <li ng-class="getClass('home.license')"><a ui-sref="home.settings" ui-sref-opts="{reload: true}">Settings</a></li>
+      </ul>
+      <button ng-click="launchCastApp()" ng-show="castStatus.devicesAvailable" class="btn btn-link pull-right"><img ng-show="castStatus.deviceState == '0'" src="/app/img/ic_cast_black_24dp.png" title="Chromecast devices available, add them to piSignage" class="img-thumbanail"/><img ng-show="castStatus.deviceState != '0'" src="/app/img/ic_cast_connected_black_24dp.png" title="Chromecast device connected" class="img-thumbanail"/></button>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="" target="_blank"><small class="text-info">follow us on&nbsp;<i class="fa fa-twitter-square text-info"></i>&nbsp;for latest updates and tips</small></a></li>
+      </ul>
+    </div>
+  </div>
+</nav> -->
+
+<!-- HEADER MOBILE-->
+<header class="header-mobile d-block d-lg-none hidden">
+    <div class="header-mobile__bar">
+        <div class="container-fluid">
+            <div class="header-mobile-inner">
+                <a class="logo" href="index.html">
+                    <img src="app/img/mqlogo.png" alt="logo"/>
+                </a>
+                <button class="hamburger hamburger--slider" type="button">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar-mobile">
+        <div class="container-fluid">
+            <ul class="navbar-mobile__list list-unstyled">
+                <li ng-if="authUser.role == 'root'">
+                    <a ui-sref="home.accounts" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-address-card"></i>Quản lý tài khoản
+                    </a>
+                </li>
+
+                <li ng-if="authUser.role == 'admin'">
+                    <a ui-sref="home.users" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-address-card"></i>Quản lý tài khoản
+                    </a>
+                </li>
+
+                <li ng-if="authUser.role == 'admin'">
+                    <a ui-sref="home.companies" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-building"></i>Quản lý khách hàng
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.players" ui-sref-opts="{reload: true}">
+                        <i class="fa fa-desktop"></i>Quản lý thiết bị
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.groups.players" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-th"></i>Quản lý nhóm phát
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.assets.main" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-folder"></i>Quản lý nội dung
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.assetsNew" ui-sref-opts="{reload: true}">
+                        <i class="fa fa-list"></i>Quản lý nội dung mới
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.playlistNew" ui-sref-opts="{reload: true}">
+                        <i class="fa fa-list"></i>Quản lý danh sách phát
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.labels" ui-sref-opts="{reload: true}">
+                        <i class="fa fa-tags"></i>Quản lý Tags
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.confirms" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-folder"></i>Phê duyệt nội dung
+                    </a>
+                </li>
+
+                <li ng-if="authUser.role == 'admin'">
+                    <a ui-sref="home.areas" ui-sref-opts="{reload: true}">
+                        <i class="fa fa-map-marker"></i>Quản lý khu vực
+                    </a>
+                </li>
+
+                <li ng-if="authUser.role == 'admin'">
+                    <a ui-sref="home.oohs" ui-sref-opts="{reload: true}">
+                        <i class="fa fa-map"></i>Quản lý vị trí OOH
+                    </a>
+                </li>
+
+<!--                <li ng-if="authUser.role == 'streamer' || authUser.role == 'admin'">-->
+<!--                    <a ui-sref="home.streaming" ui-sref-opts="{reload: true}">-->
+<!--                        <i class="fas fa-video"></i>Live Stream-->
+<!--                    </a>-->
+<!--                </li>-->
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.devices" ui-sref-opts="{reload: true}">
+                        <i class="fa fa-binoculars"></i>Theo dõi thiết bị
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.histories" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-history"></i>Lịch sử phát
+                    </a>
+                </li>
+
+                <li ng-if="authUser.role == 'admin'">
+                    <a ui-sref="home.firmware" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-cloud-upload-alt"></i>Quản lý firmware
+                    </a>
+                </li>
+
+                <li ng-if="authUser.role == 'admin'">
+                    <a ui-sref="home.settings" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-cog"></i>Thiết lập
+                    </a>
+                </li>
+
+                <li class="hidden">
+                    <a href="#">
+                        <i class="zmdi zmdi-account"></i>Thông tin tài khoản
+                    </a>
+                </li>
+
+                <li>
+                    <a ui-sref="home.changePw">
+                        <i class="zmdi zmdi-settings"></i>Thay đổi mật khẩu
+                    </a>
+                </li>
+
+                <li>
+                    <a ui-sref="login"><i class="zmdi zmdi-power"></i>Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<!-- END HEADER MOBILE-->
+
+<!-- MENU SIDEBAR-->
+<aside class="menu-sidebar d-none d-lg-block">
+    <div class="logo">
+        <a href="#">
+            <img src="app/img/mqlogo.png" alt="logo"/>
+        </a>
+    </div>
+    <div class="menu-sidebar__content js-scrollbar1">
+        <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+                <li ng-if="authUser.role == 'root'">
+                    <a ui-sref="home.accounts" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-address-card"></i>QL tài khoản
+                    </a>
+                </li>
+
+                <li ng-if="authUser.role == 'admin'">
+                    <a ui-sref="home.users" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-address-card"></i>QL tài khoản
+                    </a>
+                </li>
+
+                <li ng-if="authUser.role == 'admin'">
+                    <a ui-sref="home.companies" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-building"></i>QL khách hàng
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.players" ui-sref-opts="{reload: true}">
+                        <i class="fa fa-desktop"></i>QL thiết bị
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.groups" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-th"></i>QL nhóm phát
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.assets.main" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-folder"></i>QL nội dung
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.assetsNew" ui-sref-opts="{reload: true}">
+                        <i class="fa fa-list"></i>QL nội dung mới
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.playlistNew" ui-sref-opts="{reload: true}">
+                        <i class="fa fa-list"></i>QL danh sách phát
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.labels" ui-sref-opts="{reload: true}">
+                        <i class="fa fa-tags"></i>Quản lý Tags
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.confirms" ui-sref-opts="{reload: true}" style="font-size: 16px">
+                        <i class="fas fa-folder"></i>Phê duyệt nội dung
+                    </a>
+                </li>
+
+                <li ng-if="authUser.role == 'admin'">
+                    <a ui-sref="home.areas" ui-sref-opts="{reload: true}">
+                        <i class="fa fa-map-marker"></i>Quản lý khu vực
+                    </a>
+                </li>
+
+                <li ng-if="authUser.role == 'admin'">
+                    <a ui-sref="home.oohs" ui-sref-opts="{reload: true}">
+                        <i class="fa fa-map"></i>Quản lý vị trí OOH
+                    </a>
+                </li>
+
+<!--                <li ng-if="authUser.role == 'streamer' || authUser.role == 'admin'">-->
+<!--                    <a ui-sref="home.streaming" ui-sref-opts="{reload: true}">-->
+<!--                        <i class="fas fa-video"></i>Live Stream-->
+<!--                    </a>-->
+<!--                </li>-->
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.devices" ui-sref-opts="{reload: true}">
+                        <i class="fa fa-binoculars"></i>Theo dõi thiết bị
+                    </a>
+                </li>
+
+                <li ng-if="['admin', 'maker', 'checker'].indexOf(authUser.role) > -1">
+                    <a ui-sref="home.histories" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-history"></i>Lịch sử phát
+                    </a>
+                </li>
+
+                <li ng-if="authUser.role == 'admin'">
+                    <a ui-sref="home.firmware" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-cloud-upload-alt"></i>Quản lý firmware
+                    </a>
+                </li>
+
+                <li ng-if="authUser.role == 'admin'">
+                    <a ui-sref="home.settings" ui-sref-opts="{reload: true}">
+                        <i class="fas fa-cog"></i>Thiết lập
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+<!-- END MENU SIDEBAR-->
+<div class="page-container">
+    <!-- HEADER DESKTOP-->
+    <header class="header-desktop">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="header-wrap">
+                    <form class="form-header"></form>
+
+                    <div class="header-button">
+                        <div class="account-item clearfix js-item-menu">
+                            <div class="image">
+                                <img src="app/images/icon/avatar-02.png" alt="avatar"/>
+                            </div>
+
+                            <div class="content">
+                                <a class="js-acc-btn">{{ authUser.name ? authUser.name : 'admin' }}</a>
+                            </div>
+
+                            <div class="account-dropdown js-dropdown">
+                                <div class="info clearfix">
+                                    <div class="image">
+                                        <img src="app/images/icon/avatar-02.png" alt="avatar"/>
+                                    </div>
+
+                                    <div class="content">
+                                        <h5 class="name">{{ authUser.name ? authUser.name : 'admin' }}</h5>
+                                        <span class="email">
+                                            {{ authUser.name ? authUser.email : 'admin@mqsolutions.vn' }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="account-dropdown__body">
+                                    <div class="account-dropdown__item hidden">
+                                        <a href="#">
+                                            <i class="zmdi zmdi-account"></i>Thông tin tài khoản
+                                        </a>
+                                    </div>
+
+                                    <div class="account-dropdown__item">
+                                        <a ui-sref="home.changePw">
+                                            <i class="zmdi zmdi-settings"></i>Thay đổi mật khẩu
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="account-dropdown__footer">
+                                    <a ui-sref="login"><i class="zmdi zmdi-power"></i>Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- HEADER DESKTOP-->
+
+    <div ui-view="main" autoscroll="false" class="main-content overflow-hidden">
+
+    </div>
+</div>
+<script>
+  (function ($) {
+    // USE STRICT
+    "use strict";
+
+    const mobile_screen_width = 768;
+    if (screen.width <= mobile_screen_width) {
+      displayHeaderMobile()
+      displayHeaderDesktop()
+    }
+
+    function displayHeaderMobile() {
+      $('.header-mobile').toggleClass('hidden');
+    }
+
+    function displayHeaderDesktop() {
+      $('.header-desktop').toggleClass('hidden');
+      $('.menu-sidebar').toggleClass('hidden');
+    }
+
+    let menu = $('.js-item-menu');
+    let sub_menu_is_showed = -1;
+    // Dropdown
+    try {
+      for (let i = 0; i < menu.length; i++) {
+        $(menu[i]).on('click', function (e) {
+          e.preventDefault();
+          $('.js-right-sidebar').removeClass("show-sidebar");
+          if (jQuery.inArray(this, menu) == sub_menu_is_showed) {
+            $(this).toggleClass('show-dropdown');
+            sub_menu_is_showed = -1;
+          } else {
+            for (let i = 0; i < menu.length; i++) {
+              $(menu[i]).removeClass("show-dropdown");
+            }
+            $(this).toggleClass('show-dropdown');
+            sub_menu_is_showed = jQuery.inArray(this, menu);
+          }
+        });
+      }
+
+      $(".js-item-menu, .js-dropdown").click(function (event) {
+        event.stopPropagation();
+      });
+
+      $("body,html").on("click", function () {
+        for (let i = 0; i < menu.length; i++) {
+          menu[i].classList.remove("show-dropdown");
+        }
+        sub_menu_is_showed = -1;
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
+
+    // Right Sidebar
+    let right_sidebar = $('.js-right-sidebar');
+    let sidebar_btn = $('.js-sidebar-btn');
+
+    sidebar_btn.on('click', function (e) {
+      e.preventDefault();
+      for (let i = 0; i < menu.length; i++) {
+        menu[i].classList.remove("show-dropdown");
+      }
+      sub_menu_is_showed = -1;
+      right_sidebar.toggleClass("show-sidebar");
+    });
+
+    $(".js-right-sidebar, .js-sidebar-btn").click(function (event) {
+      event.stopPropagation();
+    });
+
+    $("body, html").on("click", function () {
+      right_sidebar.removeClass("show-sidebar");
+    });
+
+    // Sublist Sidebar
+    try {
+      let arrow = $('.js-arrow');
+      arrow.each(function () {
+        let that = $(this);
+        that.on('click', function (e) {
+          e.preventDefault();
+          that.find(".arrow").toggleClass("up");
+          that.toggleClass("open");
+          that.parent().find('.js-sub-list').slideToggle("250");
+        });
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
+
+    try {
+      // Hamburger Menu
+      $('.hamburger').on('click', function () {
+        $(this).toggleClass('is-active');
+        $('.navbar-mobile').slideToggle('500');
+      });
+      $('.navbar-mobile__list li.has-dropdown > a').on('click', function () {
+        let dropdown = $(this).siblings('ul.navbar-mobile__dropdown');
+        $(this).toggleClass('active');
+        $(dropdown).slideToggle('500');
+        return false;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    $('.account-dropdown__footer, .account-dropdown__body').on('click', 'a', function () {
+      $('.account-item').removeClass('show-dropdown');
+    });
+
+    $('.account-dropdown__footer').on('click', 'a', function () {
+      localStorage.removeItem('ngStorage-currentUser');
+    });
+
+  })(jQuery);
+</script>
+
+<!--<script type="text/ng-template" id="custom/pager">-->
+<!--    <ul class="pager ng-cloak">-->
+<!--        <li ng-repeat="page in pages"-->
+<!--            ng-class="{'disabled': !page.active, 'previous': page.type == 'prev', 'next': page.type == 'next'}"-->
+<!--            ng-show="page.type == 'prev' || page.type == 'next'" ng-switch="page.type">-->
+<!--            <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">&laquo; Previous</a>-->
+<!--            <a ng-switch-when="next" ng-click="params.page(page.number)" href="">Next &raquo;</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <div class="btn-group">-->
+<!--                <button type="button" ng-class="{'active':params.count() == 10}" ng-click="params.count(10)" class="btn btn-default">10</button>-->
+<!--                <button type="button" ng-class="{'active':params.count() == 25}" ng-click="params.count(25)" class="btn btn-default">25</button>-->
+<!--                <button type="button" ng-class="{'active':params.count() == 50}" ng-click="params.count(50)" class="btn btn-default">50</button>-->
+<!--                <button type="button" ng-class="{'active':params.count() == 100}" ng-click="params.count(100)" class="btn btn-default">1000</button>-->
+<!--            </div>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</script>-->
+
+<!--<script type="text/ng-template" id="custom/pager">-->
+<!--    <div class="bottom">-->
+<!--        <div ng-if="params.settings().counts.length" id="allocateCargoTable_length" class="dataTables_length">-->
+<!--            <label>Show-->
+<!--                <select ng-param-directive ng-model="pageCount" ng-options="count for count in params.settings().counts"-->
+<!--                        ng-change="pageCounter(pageCount)">-->
+<!--                </select>-->
+<!--                Rows-->
+<!--            </label>-->
+<!--            <div class="dataTables_paginate paging_bs_normal">-->
+<!--                <ul class="pagination ng-table-pagination pull-right">-->
+<!--                    <li ng-class="{'disabled': !page.active}" ng-repeat="page in pages" ng-switch="page.type">-->
+
+
+<!--                        <a ng-switch-when="prev" ng-click="params.page(page.number)" href=""><span-->
+<!--                                class="glyphicon glyphicon-chevron-left"></span>&nbsp;Previous</a>-->
+<!--                        <a ng-switch-when="first" ng-click="params.page(page.number)" href=""><span-->
+<!--                                ng-bind="page.number"></span></a>-->
+<!--                        <a ng-switch-when="page" ng-click="params.page(page.number)" href=""><span-->
+<!--                                ng-bind="page.number"></span></a>-->
+<!--                        <a ng-switch-when="more" ng-click="params.page(page.number)" href="">&#8230;</a>-->
+<!--                        <a ng-switch-when="last" ng-click="params.page(page.number)" href=""><span-->
+<!--                                ng-bind="page.number"></span></a>-->
+<!--                        <a ng-switch-when="next" ng-click="params.page(page.number)" href="">Next&nbsp;<span-->
+<!--                                class="glyphicon glyphicon-chevron-right"></span></a>-->
+
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</script>-->

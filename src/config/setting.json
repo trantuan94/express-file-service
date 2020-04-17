@@ -1,0 +1,28 @@
+{
+  "languages": [
+    "en",
+    "vi",
+    "ja"
+  ],
+  "defaultLanguage": "en",
+  "language": "en",
+  "roles": {
+    "root": "root",
+    "admin": "admin",
+    "agency": "agency",
+    "customer": "customer",
+    "maker": "maker",
+    "checker": "checker",
+    "streamer": "streamer"
+  },
+  "labelTypes": {
+    "asset": "assets",
+    "player": "players"
+  },
+  "groupStatus": {
+    "pending": 0,
+    "deployed": 1,
+    "approved": 2
+  },
+  "passwordDefault": "123456"
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Server Digital of MQ ICT Solutions">
+    <meta name="author" content="MQ ICT Solutions">
+    <meta name="copyright" content=", Copyright (c) 2019">
+    <link rel="icon" href="app/img/favicon.ico">
+    <title>MQ-Digital Server</title>
+    <!-- Bootstrap core CSS v3.3.4-->
+    <link rel="stylesheet" href="app/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css">-->
+    <!-- Main CSS-->
+    <link rel="stylesheet" href="app/css/custom.css">
+    <link rel="stylesheet" href="app/css/theme.css" media="all">
+    <!-- Recorder CSS-->
+    <link rel="stylesheet" href="app/css/recorder.css">
+    <link rel="stylesheet" href="/libs/angularjs-slider/dist/rzslider.min.css">
+    <!-- Vendor CSS-->
+    <link rel="stylesheet" href="/libs/ng-sortable/dist/ng-sortable.min.css">
+    <link rel="stylesheet" href="/libs/ng-sortable/dist/ng-sortable.style.min.css">
+    <link rel="stylesheet" href="/libs/ng-table/bundles/ng-table.min.css">
+    <link rel="stylesheet" href="/libs/select2/dist/css/select2.min.css" media="all">
+    <link rel="stylesheet" href="/libs/animsition/dist/css/animsition.min.css" media="all">
+    <link rel="stylesheet" href="/libs/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" media="all">
+    <link rel="stylesheet" href="/libs/perfect-scrollbar/css/perfect-scrollbar.css" media="all">
+    <link rel="stylesheet" href="/libs/wowjs/css/libs/animate.css" media="all">
+    <link rel="stylesheet" href="/libs/hamburgers/dist/hamburgers.min.css" media="all">
+    <link href="app/libs/slick/slick.css" rel="stylesheet" media="all">
+
+    <!-- Fontfaces CSS-->
+    <link rel="stylesheet" href="app/css/lato.min.css">
+    <link rel="stylesheet" href="app/css/font-face.css" media="all">
+    <link rel="stylesheet" href="app/libs/font-awesome-4.7/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="app/libs/font-awesome-5/css/fontawesome-all.min.css" media="all">
+    <link rel="stylesheet" href="app/libs/mdi-font/css/material-design-iconic-font.min.css" media="all">
+
+    <!-- Jquery JS v3.2.1-->
+    <script src="/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap JS v4.1.0 -->
+    <script src="app/libs/bootstrap-4.1/popper.min.js"></script>
+    <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Vendor JS -->
+    <script src="/libs/async/lib/async.js"></script>
+    <script src="/libs/animsition/dist/js/animsition.min.js"></script>
+    <script src="/libs/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="/libs/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+    <script src="app/libs/slick/slick.min.js"></script>
+    <!--  wowjs v1.1.3  -->
+    <script src="/libs/wowjs/dist/wow.min.js"></script>
+    <!-- jquery.waypoints v4.0.0 -->
+    <script src="/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+    <!--  jquery.counterup v2.1.0  -->
+    <script src="/libs/jquery.counterup/jquery.counterup.min.js"></script>
+    <!--  jquery-circle-progress v1.2.2  -->
+    <script src="/libs/jquery-circle-progress/dist/circle-progress.min.js"></script>
+    <script src="/libs/chart.js/dist/Chart.bundle.min.js"></script>
+    <script src="/libs/select2/dist/js/select2.min.js"></script>
+    <script src="/libs/moment/min/moment.min.js"></script>
+    <script src="/libs/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="/libs/xlsx/dist/jszip.js"></script>
+
+    <!-- app/libs JS -->
+    <script src="app/libs/mic-recorder/mic-recorder-to-mp3@2.2.1.js"></script>
+    <script src="app/libs/wavesurfer/wavesurfer.min.js"></script>
+    <!-- <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script> -->
+    <script src="app/libs/sender/cast_sender.js"></script>
+    <!-- version: v1.3.15 - v1.5.11 -->
+    <script src="/libs/angular/angular.min.js"></script>
+    <!-- ngular-ui-router v0.2.13 -->
+    <script src="/libs/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+    <!--  ng-sortable v1.2.0  -->
+    <script src="/libs/ng-sortable/dist/ng-sortable.min.js"></script>
+    <!--  angular-css v1.0.8  -->
+    <script src="/libs/angular-css/angular-css.min.js"></script>
+    <!--  angular-ui-bootstrap v0.12.1  -->
+    <script src="/libs/angular-ui-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <!-- underscore v1.5.2   -->
+    <!-- <script src="/libs/underscore/underscore-min.js"></script>-->
+    <script src="app/libs/angularjs-dropdown-multiselect/lodash.min.js"></script>
+    <!-- angularjs-dropdown-multiselect v2.0.0   -->
+    <!-- <script src="/libs/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>-->
+     <script src="app/libs/angularjs-dropdown-multiselect/angularjs-dropdown-multiselect.min.js"></script>
+    <script src="/libs/angularjs-slider/dist/rzslider.min.js"></script>
+    <script src="/libs/angular-timeago/dist/angular-timeago.min.js"></script>
+    <script src="/libs/ngstorage/ngStorage.min.js"></script>
+    <script src="/libs/ng-table/bundles/ng-table.min.js"></script>
+    <!-- socket io -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!--  controllers, configs, services  -->
+    <script src="app/js/pi-config.js"></script>
+    <script src="app/js/controllers/pi-index.js"></script>
+    <script src="app/js/controllers/login.js"></script>
+    <script src="app/js/controllers/profile.js"></script>
+    <script src="app/js/controllers/accounts.js"></script>
+    <script src="app/js/controllers/companies.js"></script>
+    <script src="app/js/controllers/firmware.js"></script>
+    <script src="app/js/controllers/settings.js"></script>
+    <script src="app/js/controllers/locations.js"></script>
+    <script src="app/js/controllers/groups.js"></script>
+    <script src="app/js/controllers/assets.js"></script>
+    <script src="app/js/controllers/playlists.js"></script>
+    <script src="app/js/controllers/labels.js"></script>
+    <script src="app/js/controllers/players.js"></script>
+    <script src="app/js/controllers/histories.js"></script>
+    <script src="app/js/directives/pi.js"></script>
+    <script src="app/js/filters/pi.js"></script>
+    <script src="app/js/services/pi.js"></script>
+    <script src="app/js/services/cast.js"></script>
+    <script src="app/js/services/loader.js"></script>
+    <script src="app/js/services/ngTable.js"></script>
+    <script src="app/js/services/assets.js"></script>
+    <script src="app/js/services/players.js"></script>
+    <script src="app/js/services/auth.js"></script>
+    <script src="app/js/app-pc.js"></script>
+    <!-- Main JS-->
+    <script src="app/js/main.js"></script>
+</head>
+
+<body id="serverapp" ng-app="piServerApp">
+    <div ui-view="" autoscroll="false"></div>
+</body>
+
+</html>

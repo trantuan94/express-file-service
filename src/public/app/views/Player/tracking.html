@@ -1,0 +1,97 @@
+<div class="row height100 overflow-auto">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title flex-content">
+                <span class="flex-item-vertial">Danh sách thiết bị</span>
+                <div class="btn-toolbar btn-group-sm flex-item-right">
+                    <a ng-click="exportFile.index()" class="btn btn-primary">
+                        <em><i class="fa fa-file-excel"></i> Xuất danh sách thiết bị</em>
+                    </a>
+                </div>
+            </h3>
+        </div>
+
+        <div class="panel-body">
+            <table ng-table="tableParams" show-filter="true" class="table table-bordered table-striped">
+                <tr ng-repeat="row in $data">
+                    <td title="'STT'" title-alt="'STT'" class="td_center">
+                        <small class="text-info truncate">{{$index + 1}}</small>
+                    </td>
+
+                    <td title="'Tên thiết bị'" sortable="'name'" filter="{name: 'text'}">
+                        <small class="text-body truncate">
+                            {{row.name || row.localName || "No name"}}
+                            <p>
+                                <small class="text-info">{{row.cpuSerialNumber}}</small>
+                            </p>
+                        </small>
+                    </td>
+
+                    <td title="'Địa chỉ'" sortable="'location'" filter="{location: 'text'}">
+                        <small class="text-body truncate">{{row.location || ''}}</small>
+                    </td>
+
+                    <td title="'Trạng thái'" sortable="'isConnected'" filter="{isConnected: 'statusBoolean'}"
+                        class="td_center">
+                        <small>
+                            <i ng-class="row.status.class"
+                               title="{{row.status.title}}"
+                               class="fa fa-circle fa-lg">
+                            </i>
+                        </small>
+                    </td>
+
+                    <td title="'Nhóm thiết bị'" sortable="'group.name'" filter="{'group.name': 'text'}">
+                        <small class="text-body truncate">{{row.group ? row.group.name : ''}}</small>
+                    </td>
+
+                    <td title="'Nội dung đang phát'" sortable="'currentPlaylist'" filter="{currentPlaylist: 'text'}">
+                        <small class="text-body truncate">{{row.currentPlaylist}}</small>
+                    </td>
+
+                    <td title="'Địa chỉ IP'" sortable="'myIpAddress'" filter="{myIpAddress: 'text'}">
+                        <small class="text-info truncate">{{row.myIpAddress}}</small>
+                    </td>
+
+                    <!--                    <td title="'Thời gian đồng bộ'" sortable="'lastUpload'" class="td_center">-->
+                    <!--                        <small class="text-danger truncate" style="font-size: small">-->
+                    <!--                            {{row.lastUpload ? (row.lastUpload | timeAgo) : "never"}}-->
+                    <!--                        </small>-->
+                    <!--                    </td>-->
+
+                    <td title="'Thời gian hoạt động'" sortable="'lastReported'" class="td_center">
+                        <small class="truncate" ng-class="row.classReport" style="font-size: small">
+                            {{row.lastReported ? (row.lastReported | timeAgo) : "never"}}
+                        </small>
+                    </td>
+
+                    <td title="'Hành động'" class="td_center" style="width: 100px">
+                        <button ng-click="$event.stopPropagation();fnDetail(row)" class="btn btn-sm btn-warning">
+                            <i class="fa fa-eye"></i> Chi tiết
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="ng-table/filters/statusBoolean.html">
+    <form class="form-inline">
+        <select class="form-control" ng-model="params.filter()['isConnected']">
+            <option value="">All</option>
+            <option value="true">Online</option>
+            <option value="false">Offline</option>
+        </select>
+    </form>
+</script>
+
+<script type="text/ng-template" id="ng-table/filters/options.html">
+    <form class="form-inline">
+        <select class="form-control" ng-model="params.filter()['type']">
+            <option value="">All</option>
+            <option value="ON">Online</option>
+            <option value="OFF">Offline</option>
+        </select>
+    </form>
+</script>

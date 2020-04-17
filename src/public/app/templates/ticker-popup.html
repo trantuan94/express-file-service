@@ -1,0 +1,134 @@
+
+<div class="modal-header">
+  <h3 class="text-warning">Thông báo cho danh sách phát</h3>
+</div>
+<div class="modal-body">
+  <form name="playlist.popForm" class="form">
+    <div class="row form-group"><small class="text-muted control-label col-sm-3 text-right">Ticker</small>
+      <div class="col-sm-9">
+        <div class="checkbox-inline">
+          <label>
+            <input type="checkbox" name="ticker_checkbox" ng-model="tickerObj.enable"/><small>Hiển thị</small>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div ng-show="tickerObj.enable" class="row form-group"><small class="text-muted col-sm-3 text-right">Kiểu</small>
+      <div class="col-sm-9">
+        <div class="radio-inline">
+          <label>
+            <input type="radio" value="slide" ng-model="tickerObj.behavior"/><small>Trượt</small>
+          </label>
+        </div>
+        <div class="radio-inline">
+          <label>
+            <input type="radio" value="scroll" ng-model="tickerObj.behavior"/><small>Di chuyển sang trái</small>
+          </label>
+        </div>
+        <div class="radio-inline">
+          <label>
+            <input type="radio" value="scrollRight" ng-model="tickerObj.behavior"/><small>Di chuyển sang phải</small>
+          </label>
+        </div>
+      </div>
+      </div>
+        <div ng-show="tickerObj.enable" class="row form-group"><small class="text-muted col-sm-3 text-right">OpenVG</small>
+        <div class="col-sm-9">
+          <div class="radio-inline">
+            <label>
+              <input type="radio" value="openvg_left" name="openvg_left" ng-model="tickerObj.behavior"/><small>trái</small>
+            </label>
+          </div>
+          <div class="radio-inline">
+            <label>
+              <input type="radio" value="openvg_right" name="openvg_right" ng-model="tickerObj.behavior"/><small>phải</small>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div ng-show="tickerObj.enable &amp;&amp; tickerObj.behavior!= &quot;openvg_right&quot;&amp;&amp; tickerObj.behavior!= &quot;openvg_left&quot;" class="form-group row">
+        <small class="control-label text-muted col-sm-3 text-right">CSS tùy chọn</small>
+        <div class="col-sm-8">
+          <input type="text" placeholder="e.g. color:#eee; font-style:italic; " ng-model="tickerObj.style" class="form-control input-sm"/>
+        </div>
+      </div>
+      <div ng-show="tickerObj.enable &amp;&amp; (tickerObj.behavior== &quot;openvg_right&quot; || tickerObj.behavior== &quot;openvg_left&quot;)" class="form-group row">
+        <small class="control-label text-muted col-sm-3 text-right">Cỡ chữ</small>
+        <div class="col-sm-2">
+          <input type="text" placeholder="28" ng-model="tickerObj.tickerFontSize" class="form-control input-sm"/>
+        </div>
+        <small class="control-label text-muted col-sm-3 text-right">Chiều rộng</small>
+        <div class="col-sm-2">
+          <input type="text" placeholder="0(full)" ng-model="tickerObj.tickerWidth" class="form-control input-sm"/>
+        </div>
+      </div>
+      <div ng-show="tickerObj.enable &amp;&amp; (tickerObj.behavior== &quot;openvg_right&quot; || tickerObj.behavior== &quot;openvg_left&quot;)" class="form-group row">
+        <small class="control-label text-muted col-sm-3 text-right">vị trí x</small>
+        <div class="col-sm-2">
+          <input type="text" placeholder="0(left)" ng-model="tickerObj.tickerX" class="form-control input-sm"/>
+        </div>
+        <small class="control-label text-muted col-sm-3 text-right">vị trí y</small>
+        <div class="col-sm-2">
+          <input type="text" placeholder="0(bottom)" ng-model="tickerObj.tickerY" class="form-control input-sm"/>
+        </div>
+      </div>
+      <div ng-show="tickerObj.enable" class="row form-group"><small class="text-muted control-label col-sm-3 text-right">Tốc độ Ticker</small>
+      <div class="col-sm-9">
+        <div class="radio-inline">
+          <label>
+            <input type="radio" value="1" name="slow" ng-model="tickerObj.textSpeed"/><small>Chậm</small>
+          </label>
+        </div>
+        <div class="radio-inline">
+          <label>
+            <input type="radio" value="2" name="medium" ng-model="tickerObj.textSpeed"/><small>Trung bình</small>
+          </label>
+        </div>
+        <div class="radio-inline">
+          <label>
+            <input type="radio" value="3" name="full" ng-model="tickerObj.textSpeed"/><small>Nhanh</small>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div ng-show="tickerObj.enable" class="row form-group">
+      <div class="col-sm-6 col-sm-offset-3">
+        <div class="checkbox-inline">
+          <label>
+            <input type="checkbox" name="rss_checkbox" ng-model="tickerObj.rss.enable"/><small>Sử dụng RSS feed</small>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div ng-show="tickerObj.enable &amp;&amp; tickerObj.rss.enable" class="form-group row"><small class="text-muted col-sm-3 text-right">Thời lượng</small>
+      <div class="col-sm-6">
+        <input type="number" ng-model="tickerObj.rss.feedDelay" placeholder="{{'rss item duration in slide mode'}}" class="form-control"/>
+      </div>
+    </div>
+    <div ng-show="tickerObj.enable &amp;&amp; tickerObj.rss.enable" class="form-group row"><small class="text-muted col-sm-3 text-right">Liên kết nguồn cấp dữ liệu RSS</small>
+      <div class="col-sm-8">
+        <input type="text" ng-model="tickerObj.rss.link" placeholder="Nhập liên kết rss ...." class="form-control"/>
+        <div class="checkbox-inline">
+          <label>
+            <input type="checkbox" name="rss_encoding" ng-model="tickerObj.rss.encodeAsBinary"/><small><i class="text-primary">Sử dụng mã hóa nhị phân cho RSS, kích hoạt tính năng này nếu các ký tự không được hiển thị đúng</i></small>
+          </label>
+        </div><br/>
+        <div class="checkbox-inline">
+          <label>
+            <input type="checkbox" name="rss_field" ng-model="tickerObj.rss.useDescription"/><small><i class="text-primary">Sử dụng trường mô tả của luồng rss thay vì trường tiêu đề</i></small>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div ng-show="tickerObj.enable &amp;&amp; !tickerObj.rss.enable" class="form-group row"><small class="text-muted col-sm-3 text-right">Thêm tin nhắn cho ticker</small>
+      <div class="col-sm-8">
+        <textarea name="ticker_messages" rows="5" ng-model="tickerObj.messages" placeholder="Nhập tin nhắn tại đây" class="form-control"></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-9 col-sm-offset-3">
+        <button ng-click="saveTickerSettings()" class="btn btn-primary">Lưu</button>
+      </div>
+    </div>
+  </form>
+</div>

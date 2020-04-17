@@ -1,0 +1,110 @@
+<div ng-show="playlist.selectedPlaylist" class="panel panel-info min-height-0">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3 class="panel-title">{{playlist.selectedPlaylist.name}}
+                    <a ng-click="collapsed = !collapsed;" class="btn btn-link">
+                        <i ng-class="{'fa-carret-right':collapsed,'fa-carret-down':!collapsed}" class="fa fa-lg"></i>
+                    </a>
+                </h3>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="btn-toolbar pull-right">
+                    <div class="btn-group">
+                        <a ui-sref="home.playlists.playlistAddAssets({playlist:playlist.selectedPlaylist.name})"
+                           ui-sref-opts="{reload: true, notify: true}" class="btn btn-primary pull-right">
+                            Gán nội dung
+                        </a>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;
+                    <a ng-click="closeWindow()" class="pull-right close" style="margin-top: 5px">×</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="!collapsed" class="panel-body">
+        <form class="form-horizontal">
+            <div class="form-group layout_playlist">
+                <label class="control-label col-sm-6 text-muted">Chọn bố cục cho danh sách phát</label>
+                <div class="col-sm-6 input">
+                    <div class="btn-group">
+                        <button ng-click="openLayout ()" class="btn btn-default">
+                            <strong>{{playlist.selectedPlaylist.layout}}</strong>
+                            <span>:{{layouts[playlist.selectedPlaylist.layout].title}}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group layout_playlist">
+                <label class="control-label col-sm-6 text-muted">Cấu hình Ticker</label>
+                <div class="col-sm-6 input">
+                    <button ng-click="openTicker ()" class="btn btn-default">
+                        <span>{{playlist.selectedPlaylist.settings.ticker.enable?"Bật":"Tắt"}}</span>
+                        <!--span {{playlist.selectedPlaylist.settings.ticker.rss.enable?" with RSS feed":""}}-->
+                    </button>
+                    <!--.input-group
+                    <input name="ticker_messages" ng-model="playlist.selectedPlaylist.settings.ticker.messages" placeholder="Type in the Ticker message" class="form-control"/>
+                    <div class="input-group-btn">
+                      <button ng-click="saveSettings()" class="btn btn-default pull-right"><i class="fa fa-check"></i></button>
+                    </div>
+                    -->
+                </div>
+            </div>
+
+            <div class="form-group layout_playlist">
+                <label class="control-label col-sm-6 text-muted">Cấu hình danh sách phát</label>
+                <div class="col-sm-6 input">
+                    <button ng-click="openAd ()" class="btn btn-default">
+                        Thiết lập&nbsp;
+                        <span class="badge">
+                            <small ng-if="playlist.selectedPlaylist.settings.ads &amp;&amp; playlist.selectedPlaylist.settings.ads.adPlaylist">
+                                advert
+                            </small>
+
+                            <small ng-if="playlist.selectedPlaylist.settings.domination &amp;&amp; playlist.selectedPlaylist.settings.domination.enable">
+                                domination
+                            </small>
+
+                            <small ng-if="playlist.selectedPlaylist.settings.event &amp;&amp; playlist.selectedPlaylist.settings.event.enable">
+                                event
+                            </small>
+
+                            <small ng-if="playlist.selectedPlaylist.settings.audio &amp;&amp; playlist.selectedPlaylist.settings.audio.enable">
+                                audio
+                            </small>
+                        </span>
+                    </button>
+                    <!--.checkbox
+                    <label>
+                      <input type="checkbox" ng-model="playlist.selectedPlaylist.settings.ads.adPlaylist"/><span>Insert the assets of this playlist periodically like Advertisement</span>
+                    </label>
+                    -->
+                </div>
+            </div>
+            <!--.form-group(ng-show="playlist.selectedPlaylist.settings.ads.adPlaylist")
+            <label class="control-label col-sm-4 text-muted">Insert Interval (seconds)</label>
+            <div class="col-sm-8">
+              <input type="number" ng-model="playlist.selectedPlaylist.settings.ads.adInterval" class="form-control"/>
+            </div>
+            -->
+            <!--.form-group(ng-show="playlist.selectedPlaylist.settings.ads.adPlaylist")
+            <div class="col-sm-8 col-sm-offset-4">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="playlist.selectedPlaylist.settings.ads.noMainPlay"/><span>Play only in side/bottom zones&nbsp;</span>
+                  <p class="text-muted">(still a dummy Main zone file need to be selected)</p>
+                </label>
+              </div>
+            </div>
+            -->
+            <!--.form-group
+            <div class="col-sm-8 col-sm-offset-4">
+              <button ng-click="saveSettings()" class="btn btn-success btn-sm">Save</button>
+            </div>
+            -->
+        </form>
+    </div>
+</div>

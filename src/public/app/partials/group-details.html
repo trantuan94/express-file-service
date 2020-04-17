@@ -1,0 +1,369 @@
+<div ng-if="group.selectedGroup" class="panel panel-info min-height-0">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-sm-6">
+                <div ng-if="group.selectedGroup.status != 2">
+                    <h3 class="panel-title" style="margin-top: 5px">
+                        Nhóm phát '<span class="text-info">{{group.selectedGroup.name}}</span>'
+                    </h3>
+                </div>
+
+                <div ng-if="group.selectedGroup.status == 2">
+                    <h3 class="panel-title">
+                        Nhóm phát '<span class="text-info">{{group.selectedGroup.name}}</span>'
+                    </h3>
+                    <h5>
+                        <small class="text-info">đang được triển khai</small>
+                    </h5>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="btn-toolbar pull-right">
+                    <div class="btn-group" ng-if="authUser.role !== 'checker'">
+                        <a ng-click="emergencyMessage()" class="btn btn-default btn-sm">
+                            <em class="text-danger">Tin nhắn khẩn cấp</em>
+                        </a>
+
+                        <a ng-click="groupTicker()" class="btn btn-default btn-sm">
+                            <em class="text-danger">Thông báo nhóm</em>
+                        </a>
+
+                        <a ng-click="displaySet()" class="btn btn-default btn-sm">
+                            <em class="text-danger">Cài đặt nhóm</em>
+                        </a>
+                    </div>
+
+                    <div class="btn-group" ng-if="authUser.role === 'checker' && group.selectedGroup.status == 1">
+                        <a class="btn btn-success btn-sm"
+                           ng-disabled="!group.selectedGroup.playlists.length"
+                           ng-click="approveDeploy()">
+                            Phê duyệt
+                        </a>
+
+                        <a ng-click="cancelDeploy()" class="btn btn-warning btn-sm">
+                            Không phê duyệt
+                        </a>
+                    </div>
+                    &nbsp;&nbsp;&nbsp;
+                    <a ng-click="closeWindow()" class="pull-right close" style="margin-top: 5px">×</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="authUser.role == 'checker'">
+        <div class="panel-body">
+            <div ng-repeat="pl in group.selectedGroup.playlists" ng-if="group.selectedGroup.playlists.length > 0">
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <small ng-if="$index > 0">Danh sách phát bổ sung cho nhóm:</small>
+                        <small ng-if="$index == 0">Danh sách phát mặc định cho nhóm:</small>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <small class="text-info">{{pl.name}}</small>
+                    </div>
+
+                    <div class="col-sm-4" ng-if="$index > 0">
+                        <small class="text-info">
+                            Lịch phát:
+                        </small>
+
+                        <small ng-if="pl.settings.durationEnable">
+                            {{pl.settings.startdate | date:'MMM d': 'UTC'}} -
+                            {{pl.settings.enddate | date:'MMM d': 'UTC'}} &nbsp&nbsp
+                        </small>
+
+                        <small ng-if="pl.settings.timeEnable">
+                            {{pl.settings.starttime | date: 'hh:mm a'}} -
+                            {{pl.settings.endtime | date: 'hh:mm a'}}
+                        </small>
+
+                        <small>{{weekDaysText[$index]}}</small>
+
+                        <small>{{monthDaysText[$index]}}</small>
+                    </div>
+                </div>
+
+                <div ng-if="asset.groupWiseAssets && asset.groupWiseAssets[pl.name] && asset.groupWiseAssets[pl.name].assets.length">
+                    <ul ng-model="asset.groupWiseAssets[pl.name].assets" style="min-height:50px;" class="list-group">
+                        <li ng-repeat="file in asset.groupWiseAssets[pl.name].assets"
+                            style="margin:0px;min-height:70px;" class="list-group-item">
+
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <a ng-click="showAssetDetail(file)">
+                                        <img class="media-object img-rounded"
+                                             ng-if="file.fileDetails.thumbnail"
+                                             ng-src="{{file.fileDetails.thumbnail}}"/>
+
+                                        <div ng-if="!file.fileDetails.thumbnail"
+                                             class="letter-box media-object img-rounded">
+                                            <span ng-if="file.fileDetails.type == &quot;audio&quot; || file.fileDetails.type == &quot;radio&quot;">
+                                                <i class="fa fa-music"></i>
+                                            </span>
+
+                                            <span ng-if="file.fileDetails.type != &quot;audio&quot; &amp;&amp; file.fileDetails.type != &quot;radio&quot;">
+                                                {{file.fileDetails.type.slice(0,1) || 'N'}}
+                                            </span>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="col-sm-10">
+                                    <div class="row">
+                                        <div class="col-sm-7">
+                                            <small>
+                                                {{file.fileDetails.name}}
+                                            </small>
+                                            <small ng-if="playlist.selectedPlaylist && !assetConfig.assignState">
+                                                {{file.playlistDetails.side}}; {{file.playlistDetails.bottom}}
+                                            </small>
+                                        </div>
+
+                                        <div class="col-sm-5">
+                                            <small ng-if="file.fileDetails.resolution.width"
+                                                   class="text-muted pull-right">
+                                                {{file.fileDetails.resolution.width}}x{{file.fileDetails.resolution.height}}
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-7">
+                                            <small class="text-muted">
+                                                {{file.fileDetails.type}},&nbsp;{{file.fileDetails.size}},&nbsp;
+                                                {{file.fileDetails.createdAt | date: 'MMM dd'}}
+                                            </small>
+                                        </div>
+
+                                        <div class="col-sm-5">
+                                            <small ng-if="file.fileDetails.validity.enable" class="pull-right">
+                                                {{file.fileDetails.validity.startdate | date:'MMM d':'UTC'}} -
+                                                {{file.fileDetails.validity.enddate | date:'MMM d':'UTC'}}
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div ng-if="group.selectedGroup.playlists.length == 0 || !asset.groupWiseAssets">
+                Không nội dung
+            </div>
+        </div>
+
+        <div class="row modal-footer">
+            <div class="col-sm-12">
+                <div ng-if="group.selectedGroup.playlists && group.selectedGroup.playlists.length > 1">
+                    <a ng-click="exportSchedule(group.selectedGroup)" class="btn btn-success">
+                        <i class="fa fa-file-excel"></i> Xuất lịch phát cố định
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="authUser.role !== 'checker'">
+        <div class="panel-body">
+            <form role="form" name="deployform" as-sortable="sortable.options" ng-model="sortable.playlistArray">
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <div class="checkbox-inline">
+                            <label>
+                                <small>
+                                    <input type="checkbox"
+                                           title="Lịch phát sóng trực tiếp"
+                                           ng-model="group.selectedGroup.isLiveSchedule"
+                                           ng-change="checkBoxOnGroup(this)"/>
+                                    <p>Phát theo lịch cố định</p>
+                                </small>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="checkbox-inline">
+                            <label>
+                                <small>
+                                    <input type="checkbox"
+                                           ng-model="group.selectedGroup.loadPlaylistOnCompletion"
+                                           ng-change="checkBoxOnGroup(this)"/>
+                                    <p>Thay đổi sau khi kết thúc danh sách phát hiện tại</p>
+                                </small>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <h5>Danh sách phát mặc định cho nhóm:</h5>
+                    </div>
+
+                    <div class="col-sm-6" ng-if="group.selectedGroup.isLiveSchedule">
+                        <h5 class="text-info">{{group.selectedGroup.playlists[0].name}}</h5>
+                    </div>
+                </div>
+
+                <div class="row form-group" ng-if="!group.selectedGroup.isLiveSchedule">
+                    <div class="col-sm-6">
+                        <div class="checkbox">
+                            <label>
+                                <small>
+                                    <input type="checkbox"
+                                           title="Default playlist assets will be played along with selected playlist"
+                                           ng-model="group.selectedGroup.combineDefaultPlaylist"
+                                           ng-change="checkBoxOnGroup(this)"/>
+                                    <p>Phát cùng với danh sách phát được lên lịch</p>
+                                </small>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <select class="form-control"
+                                ng-model="group.selectedGroup.playlists[0].name"
+                                ng-options="pl for pl in playlist.normalPlaylistNames track by pl"
+                                ng-change="updateGroup()">
+                            <option value="">--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <hr>
+                <div ng-show="group.selectedGroup.playlists[0].name.length">
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <h5>Bạn có thể chọn danh sách phát bổ sung:</h5>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-sm-6" ng-if="!group.selectedGroup.isLiveSchedule">
+                            <div class="checkbox">
+                                <label>
+                                    <small>
+                                        <input type="checkbox"
+                                               title="Content from all the eligible playlists will be combined"
+                                               ng-model="group.selectedGroup.playAllEligiblePlaylists"
+                                               ng-change="checkBoxOnGroup(this)"/>
+                                        <p>Kết hợp nội dung của tất cả các danh sách phát theo lịch</p>
+                                    </small>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <a ng-click="add()" class="btn btn-warning btn-sm">
+                                <i class="fa fa-lg fa-plus"></i>&nbsp;Thêm
+                            </a>
+
+                            <span ng-show="showMaxErr" class="text-warning">
+                                {{'Danh sách phát tối đa được phép là 30'}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-repeat="pl in group.selectedGroup.playlists" ng-if="$index &gt; 0"
+                     as-sortable-item="as-sortable-item" class="row form-group">
+
+                    <div as-sortable-item-handle="as-sortable-item-handle" class="col-sm-1 text-right">
+                        <h4 style="text-align: center; padding-top:5px">{{$index + '.'}}</h4>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <select ng-model="pl.name" style="background:#f8f8f8;"
+                                ng-options="plitems for plitems in playlist.playlistNames track by plitems"
+                                ng-change="updateGroup()" class="form-control">
+                            <option value="">--</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <small ng-class="{'text-info': (pl.plType == 'regular'), 'text-warning': (pl.plType != 'regular') }">
+                            {{pl.plType}}
+                        </small>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <a ng-show="pl.name" ng-click="scheduleCalendar(pl)" class="btn btn-link">
+                            <i class="fa fa-calendar fa-lg text-primary"></i>
+                        </a>
+
+                        <small ng-if="pl.name &amp;&amp; !(pl.settings.durationEnable || pl.settings.timeEnable || pl.settings.weekdays.length || pl.settings.monthdays.length)">
+                            Đặt lịch&nbsp;
+                        </small>
+
+                        <small ng-if="pl.settings.durationEnable">
+                            {{pl.settings.startdate | date:'MMM d': 'UTC'}} -
+                            {{pl.settings.enddate | date:'MMM d': 'UTC'}} &nbsp&nbsp
+                        </small>
+
+                        <small ng-if="pl.settings.timeEnable">
+                            {{pl.settings.starttime | date: 'hh:mm a'}} -
+                            {{pl.settings.endtime | date: 'hh:mm a'}}
+                        </small>
+
+                        <small>{{weekDaysText[$index]}}</small>
+
+                        <small>{{monthDaysText[$index]}}</small>
+                    </div>
+
+                    <div ng-show="pl.name.length" class="col-sm-1">
+                        <a ng-click="delete($index)" class="btn btn-link"><i class="fa fa-times text-danger"></i></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row modal-footer">
+            <div class="col-sm-6">
+                <div ng-if="group.selectedGroup.status != 1" class="pull-left">
+                    <a ng-disabled="!group.selectedGroup.playlists.length" ng-click="deploy()" class="btn btn-primary">
+                        Triển khai
+                    </a>
+                </div>
+
+                <div ng-if="group.selectedGroup.status == 1" class="pull-left">
+                    <a ng-click="cancelDeploy()" class="btn btn-warning">
+                        Ngừng triển khai
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div ng-if="group.selectedGroup.playlists && group.selectedGroup.playlists.length > 1">
+                    <a ng-click="exportSchedule(group.selectedGroup)" class="btn btn-success">
+                        <i class="fa fa-file-excel"></i> Xuất lịch phát cố định
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--li.list-group-item
+    <form>
+      <div class="form-group">
+        <label class="control-label col-sm-4 text-muted">Add a Playlist to the group</label>
+        <div class="input-group col-sm-8">
+          <select ng-model="newPlaylistName" ng-options="pl.name as pl.name for pl in playlists" class="form-control">
+            <option value="">-- choose playlist --</option>
+          </select>
+          <div class="input-group-btn">
+            <button ng-click="add()" class="btn btn-info"><i class="fa fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+    </form>
+    -->
+    <!--.panel-footer
+    <button ng-click="deploy()" class="btn btn-primary btn-block">{{group.playlists.length?"DEPLOY":"Nothing to deploy"}}</button>
+    -->
+</div>

@@ -1,0 +1,131 @@
+<div class="row height100 overflow-auto">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title flex-content">
+                <span class="flex-item-vertial">Danh sách nội dung</span>
+                <div class="btn-toolbar btn-group-sm flex-item-right">
+                    <div dropdown="dropdown" class="dropdown col-sm-6">
+                        <button dropdown-toggle="dropdown-toggle" class="btn btn-primary btn-sm dropdown-toggle">
+                            <i class="fa fa-plus"></i>&nbsp;Thêm
+                        </button>
+
+                        <ul role="menu" class="dropdown-menu">
+                            <li>
+                                <nodeims-file-upload
+                                        onstart="upload.onstart()"
+                                        onprogress="upload.onprogress(percentDone)"
+                                        onerror="upload.onerror(files, type, msg)"
+                                        ondone="upload.ondone(files, data)"
+                                >
+                                    Tải lên tập tin
+                                </nodeims-file-upload>
+                            </li>
+
+                            <li>
+                                <a ng-click="link.showPopup()" class="btn btn-link btn-block">
+                                    Thêm một liên kết
+                                </a>
+                            </li>
+
+                            <li>
+                                <a ng-click="link.showPopup('txt')" class="btn btn-link btn-block">
+                                    Thêm một tin nhắn
+                                </a>
+                            </li>
+
+                            <!--<li>
+                                <a ng-click="configureGCalendar()" class="btn btn-link btn-block">
+                                    Add Calendar
+                                </a>
+                            </li>-->
+
+                            <li>
+                                <a ng-click="audio.showPopup()" class="btn btn-link btn-block">
+                                    Thêm tệp âm thanh
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </h3>
+        </div>
+
+        <div class="panel-body">
+            <table ng-table="tableParams" show-filter="true" class="table table-bordered table-striped">
+                <tr ng-repeat="row in $data">
+                    <td title="'STT'" title-alt="'STT'" class="td_center">
+                        <small class="text-info truncate">{{$index + 1}}</small>
+                    </td>
+                    <td title="'Icons'" class="td_center">
+                        <a ng-click="fn.showDetails(row.name)">
+                            <img ng-if="row.thumbnail" ng-src="{{row.thumbnail}}" class="media-object img-rounded"/>
+
+                            <div ng-if="!row.thumbnail" class="letter-box media-object img-rounded">
+                                <span ng-if="row.type == &quot;audio&quot; || row.type == &quot;radio&quot;">
+                                    <i class="fa fa-music"></i>
+                                </span>
+
+                                <span ng-if="row.type != &quot;audio&quot; &amp;&amp; row.type != &quot;radio&quot;">
+                                    {{row.type.slice(0,1) || 'N'}}
+                                </span>
+                            </div>
+                        </a>
+                    </td>
+                    
+                    <td title="'Tên'" sortable="'name'" filter="{name: 'text'}">
+                        <small class="text-body truncate">{{row.name}}</small>
+                    </td>
+                    <td title="'Nhãn'" sortable="'labels'" filter="{labels: 'options'}">
+                        <small class="text-info">{{row.labels.join(',')}}</small>
+                    </td>
+                    <td title="'Công ty'" sortable="'company.name'" filter="{'company.name': 'text'}">
+                        <small class="text-body truncate">{{row.company ? row.company.name : ''}}</small>
+                    </td>
+                    <td title="'Thông tin chi tiết'">
+                        <small ng-if="row.resolution.width" class="text-muted">
+                            {{row.resolution.width}}x{{row.resolution.height}}
+                        </small>
+                        <small class="text-muted">
+                            {{row.type}},&nbsp;{{row.size}},&nbsp;{{row.createdAt | date: 'MMM dd'}}
+                        </small>
+                    </td>
+                    <td title="'Thời gian hiệu lực'" class="td_center">
+                        <button title="{{'Add validity period for the asset'}}" ng-click="scheduleValidity(file)"
+                                class="btn btn-link btn-xs">
+                            <i class="fa fa-calendar">&nbsp;</i>
+
+                            <small ng-if="!(row.validity.enable)">
+                                Thêm thời gian hiệu lực
+                            </small>
+
+                            <small ng-if="row.validity.enable">
+                                {{row.validity.startdate | date:'MMM d':'UTC'}} -
+                                {{row.validity.enddate | date:'MMM d':'UTC'}}
+                            </small>
+                        </button>
+                    </td>
+                    <td title="'Hành động'" class="td_center">
+                        <input type="checkbox" name="checkbox" ng-model="file.selected"
+                               ng-change="ngDropdown.checkbox(file)"/>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="ng-table/filters/daterange.html">
+    <form class="form-inline">
+        <input class="form-control" format="yyyy-mm-dd" type="date" ng-model="params.filter()['insert.when']" />
+    </form>
+</script>
+
+<script type="text/ng-template" id="ng-table/filters/options.html">
+    <form class="form-inline">
+        <select ng-options="mode.value as mode.label for mode in modes"
+                class="form-control" ng-model="params.filter()['mode']">
+            <option value="" selected="selected">All</option>
+        </select>
+    </form>
+</script>

@@ -1,0 +1,58 @@
+<div class="row height100 overflow-auto">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title flex-content">
+                <span class="flex-item-vertial">Danh sách nhóm phát</span>
+                <div class="btn-toolbar btn-group-sm flex-item-right">
+                    <a ng-click="fn.deployAll()" class="btn btn-primary">
+                        Triển khai tất cả
+                    </a>
+                    <a ng-click="fn.unDeployAll()" class="btn btn-danger">
+                        Ngừng triển khai tất cả
+                    </a>
+                </div>
+            </h3>
+        </div>
+
+        <div class="panel-body">
+            <form name="addform" ng-submit="fn.save()" style="margin-bottom: 1rem;">
+                <div class="input-group col-xs-12">
+                    <input type="text" ng-model="newGroup.name" required="required" class="form-control" placeholder="Thêm nhóm phát mới"/>
+                    <span class="input-group-btn">
+                    <button type="submit" class="btn btn-info">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </span>
+                </div>
+            </form>
+
+            <table ng-table="tableParams" show-filter="true" class="table table-bordered table-striped">
+                <tr ng-repeat="row in $data">
+                    <td title="'STT'" title-alt="'STT'" class="td_center">
+                        <small class="text-info truncate">{{$index + 1}}</small>
+                    </td>
+                    <td title="'Nhóm phát'" sortable="'name'" filter="{name: 'text'}">
+                        <small class="text-body truncate">{{row.name}}</small>
+                    </td>
+                    <td title="'Công ty'" sortable="'company.name'" filter="{'company.name': 'text'}">
+                        <small class="text-body truncate">{{row.company ? row.company.name : ''}}</small>
+                    </td>
+                    <td title="'Hành động'" class="td_center">
+                        <button ng-click="$event.stopPropagation();fn.toDetail(row)" class="btn btn-sm btn-info">
+                            <i class="fa fa-info-circle"></i> Chi tiết
+                        </button>
+
+                        <button ng-click="$event.stopPropagation();fn.edit(row)" class="btn btn-sm btn-warning">
+                            <i class="fa fa-edit"></i> Sửa
+                        </button>
+
+                        <button ng-click="$event.stopPropagation();fn.delete(row)" class="btn btn-sm btn-danger">
+                            <i class="fa fa-times-circle"></i> Xóa
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>

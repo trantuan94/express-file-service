@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <h3 class="text-warning">
+        <span ng-if="titleExport">{{titleExport}}</span>
+        <span ng-if="!titleExport">Xuất file theo lịch phát</span>
+        <a ng-click="modalExport.close()" class="pull-right close">×</a>
+    </h3>
+</div>
+
+<div class="modal-body">
+    <form role="form" name="player_settings">
+
+        <div class="form-group row">
+            <label class="control-label col-sm-4">Thời gian bắt đầu</label>
+            <div class="col-sm-8">
+                <input type="date" ng-model="calendarPlay.start" class="form-control" ng-change="exportFile.changeValue()"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-4">Thời gian kết thúc</label>
+            <div class="col-sm-8">
+                <input type="date" ng-model="calendarPlay.end" class="form-control" ng-change="exportFile.changeValue()"/>
+            </div>
+        </div>
+
+        <div class="form-group row" ng-if="calendarPlay.errorMsg">
+            <label class="control-label col-sm-12 text-danger">{{calendarPlay.errorMsg}}</label>
+        </div>
+
+    </form>
+</div>
+
+<div class="modal-footer">
+    <div class="pull-right">
+        <button ng-click="exportFile.excel(calendarPlay)"
+                class="btn btn-success btn-sm">
+            <i class="fa fa-file-excel-o"></i> Xuất Excel
+        </button>
+    </div>
+</div>

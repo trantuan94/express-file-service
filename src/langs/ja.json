@@ -1,0 +1,183 @@
+{
+  "ok": "OK",
+  "unauthorized": "UnauthorizedError: invalid token",
+  "unauthenticated": "メールアドレスまたはパスワードが間違っています",
+  "unprocessable": "Unprocessable entity",
+  "Bad_Request": "Bad request",
+  "Disable_Api": "API was already disabled",
+  "Forbidden": "Forbidden",
+  "Not_Found": "見つかりません",
+  "Not_Implement": "Function has not implemented yet",
+  "Internal_Server_Error": "Internal server error",
+  "Errors": {
+    "general": "エラーが発生しましたので、もう一度お試しください。",
+    "create": "データを追加するうちにエラーが発生しました%0",
+    "update": "データを更新するうちにエラーが発生しました%0",
+    "delete": "データを削除するうちにエラーが発生しました%0",
+    "login": "メールまたはパスワードが間違っています。",
+    "register": "%0アカウントを追加できません",
+    "Permission_Denied": "あなたはこの操作を行う権限を持っていません",
+    "Cannot_Change_Order_Status": "データ更新で受注の状態を変更できません",
+    "Cannot_Delete": "あなたはこのデータを削除する権限を持っていません",
+    "Change_Password": "パスワードを変更するうちにエラーが発生しました %0",
+    "Change_Order_Status": "受注の状態を更新するうちにエラーが発生しました。%0",
+    "Email_Invalid": "メールアドレスは不正です (%0)",
+    "Load_Detail_Failed": "詳細データを取得するうちにエラーが発生しました %0",
+    "Load_Lists_Failed": "データを取得するうちにエラーが発生しました %0",
+    "New_Old_Pw_Must_Different": "新しパスワードは現在のパスワードと異なる必要があります",
+    "Incorrect_Password": "パスワードが間違っています。パスワードを忘れた場合は、管理者に連絡してください。",
+    "Old_Pw_Not_Match": "現在のパスワードが正しくありません",
+    "Pw_Len_Warning": "パスワードには %0文字~ %1文字に入力してください ",
+    "Pw_Not_Match": "パスワードが一致しません。再入力してください !",
+    "Reset_Password": "Cannot reset password for this account.",
+    "accounts": {
+      "Not_Activated": "アカウントは有効化されていません。 有効化コードを取得するには、メールアドレスを入力してください。",
+      "Activation_Expired": "有効化コードの有効期限が切れました。",
+      "Activation_Invalid": "有効化コードは不正です。",
+      "Customer_Not_Found": "Không tìm thấy mối quan hệ giữa thông tin khách hàng và tài khoản người dùng"
+    },
+    "contracts": {
+      "Status_InValid": "Trạng thái hợp đồng không hợp lệ."
+    },
+    "groups": {
+      "default": "System group, can not create/edit/delete"
+    },
+    "playlist": {
+      "default": "System playlist, can not create/edit/delete"
+    },
+    "Create_Folder_Media": "Không thể tạo thư mục media: %0",
+    "deploy": "Triển khai thất bại: %0",
+    "unDeploy": "Ngừng triển khai thất bại: %0",
+    "Device_Offline": "Thiết bị đang ngoại tuyến. Không thể thực hiện thao tác này.",
+    "device": {
+      "Not_Company_Found": "Thiết bị %0 chưa được gán với khách hàng",
+      "Not_Group_Found": "Thiết bị %0 chưa được gán với danh sách phát"
+    }
+  },
+  "Success": {
+    "general": "成功!",
+    "create": "データが追加されました。",
+    "update": "データが更新されました。",
+    "delete": "データが削除されました。",
+    "upload": "Tải lên dữ liệu thành công",
+    "login": "ログインしました。",
+    "register": "アカウントが登録されました。",
+    "Change_Password": "パスワードが変更されました。",
+    "Reset_Password": "パスワードが再発行されました。新しいパスワードでログインしてください。",
+    "accounts": {
+      "delete": "%0アカウントが削除されました。",
+      "Send_Mail_Created": "%0アカウントが作成されました。アクセス情報は登録された%1メールアドレスへ送信しました。"
+    },
+    "deploy": "Triển khai thành công",
+    "unDeploy": "Ngừng triển khai thành công",
+    "Export_Excel": "Xuất file excel thành công",
+    "Set_Wifi": "Cài đặt thành công. Thiết bị sẽ tự khởi động lại sau 10 giây"
+  },
+  "Load_Lists_Errors": {
+    "general": "Lấy danh sách đối tượng xảy ra lỗi: %0",
+    "user": "Lấy danh sách người dùng xảy ra lỗi: %0",
+    "agency": "%0配達一覧が表示できません。",
+    "company": "%0履歴が表示できません。",
+    "customer": "%0履歴が表示できません。",
+    "area": "Lấy danh sách khu vực xảy ra lỗi: %0",
+    "ooh": "Lấy danh sách vị trí xảy ra lỗi: %0",
+    "group": "Lấy danh sách nhóm phát xảy ra lỗi: %0",
+    "device": "Lấy danh sách thiết bị xảy ra lỗi: %0",
+    "playlist": "Lấy danh sách phát xảy ra lỗi: %0",
+    "asset": "Lấy danh sách nội dung xảy ra lỗi: %0",
+    "label": "Lấy danh sách nhãn xảy ra lỗi: %0"
+  },
+  "Found_Errors": {
+    "general": "%0で絞り込むことができません。エラーが発生しました。%0",
+    "user": "ユーザーで絞り込むことができません。エラーが発生しました。%0",
+    "agency": "エリアコードで絞り込むことができません。エラーが発生しました。%0",
+    "company": "顧客で絞り込むことができません。エラーが発生しました。%0",
+    "customer": "顧客で絞り込むことができません。エラーが発生しました。%0",
+    "area": "Tìm kiếm khu vực xảy ra lỗi: %0",
+    "ooh": "Tìm kiếm vị trí xảy ra lỗi: %0",
+    "group": "Tìm kiếm nhóm phát xảy ra lỗi: %0",
+    "device": "Tìm kiếm thiết bị xảy ra lỗi: %0",
+    "playlist": "Tìm kiếm danh sách phát xảy ra lỗi: %0",
+    "asset": "Tìm kiếm nội dung xảy ra lỗi: %0",
+    "label": "Tìm kiếm nhãn xảy ra lỗi: %0"
+  },
+  "Exists": {
+    "general": "%0が既に存在しています。",
+    "user": "%0のユーザーが既に存在しています。",
+    "agency": "%0のエリアが既に存在しています。",
+    "company": "%0の顧客が既に存在しています。",
+    "customer": "%0の顧客が既に存在しています。",
+    "area": "%0のエリアが既に存在しています。",
+    "ooh": "Vị trí %0 đã tồn tại.",
+    "group": "Nhóm phát %0 đã tồn tại.",
+    "playlist": "Danh sách phát %0 đã tồn tại.",
+    "asset": "Nội dung %0 đã tồn tại.",
+    "label": "Nhãn %0 đã tồn tại."
+  },
+  "Not_Exists": {
+    "general": "%0が存在しません。",
+    "user": "%0のアカウントが存在しません。",
+    "agency": "%0のエリアが存在しません。",
+    "company": "%0の顧客が存在しません。",
+    "customer": "%0の顧客が存在しません。",
+    "area": "%0のエリアが存在しません。",
+    "ooh": "Vị trí %0 không tồn tại.",
+    "group": "Nhóm phát %0 không tồn tại.",
+    "device": "Thiết bị %0 không tồn tại.",
+    "playlist": "Danh sách phát %0 không tồn tại.",
+    "asset": "Nội dung %0 không tồn tại.",
+    "label": "Nhãn %0 không tồn tại."
+  },
+  "Not_Founds": {
+    "general": "%0が存在しません。",
+    "Request_Object": "Invalid request. Object is required."
+  },
+  "Required": {
+    "general": "この項目は必須項目です。"
+  },
+  "Unique": {
+    "agency": {
+      "code": "%0のエリアコードが既存しています。"
+    },
+    "area": {
+      "code": "%0のエリアコードが既存しています。"
+    },
+    "company": {
+      "code": "%0の顧客コードが既存しています。"
+    },
+    "customer": {
+      "code": "%0の顧客コードが既存しています。"
+    },
+    "label": {
+      "name": "Label %0 is already taken. Please enter another value."
+    },
+    "user": {
+      "code": "%0のユーザーコードが既存しています。",
+      "email": "%0のメールアドレスが既存しています。"
+    }
+  },
+  "SendMail": {
+    "Title_No_Content": "%0 Cảnh báo thiết bị không phát nội dung",
+    "Title_On_Offline": "%0 Cảnh báo thiết bị bật/tắt",
+    "Notify_No_Content": "Thiết bị %0 đang không phát nội dung gì.",
+    "Notify_Offline": "Thiết bị %0 mới bị ngắt kết nối với hệ thống.",
+    "Notify_Online": "Thiết bị %0 mới kết nối với hệ thống."
+  },
+  "DayInWeek": {
+    "monday": "月",
+    "tuesday": "火",
+    "wednesday": "水",
+    "thursday": "木",
+    "friday": "金",
+    "saturday": "土",
+    "sunday": "日"
+  },
+  "Roles": {
+    "admin": "Admin",
+    "maker": "Maker",
+    "checker": "Checker",
+    "streamer": "Streamer",
+    "customer": "Customer",
+    "agency": "Agency"
+  }
+}

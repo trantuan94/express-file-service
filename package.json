@@ -20,5 +20,20 @@
   "bugs": {
     "url": "https://github.com/trantuan94/express-file-service/issues"
   },
-  "homepage": "https://github.com/trantuan94/express-file-service#readme"
+  "homepage": "https://github.com/trantuan94/express-file-service#readme",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.5.4",
+    "await-to-js": "^2.1.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "fs-extra": "^9.0.0",
+    "gm": "^1.23.1",
+    "grpc": "^1.24.2",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "mongodb": "^3.5.6",
+    "mv": "^2.1.1",
+    "node-ffprobe": "^3.0.0"
+  }
 }

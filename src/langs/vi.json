@@ -1,0 +1,183 @@
+{
+  "ok": "OK",
+  "unauthorized": "UnauthorizedError: invalid token",
+  "unauthenticated": "Unauthenticated. User or password was invalid!",
+  "unprocessable": "Unprocessable entity",
+  "Bad_Request": "Bad request",
+  "Disable_Api": "API was already disabled",
+  "Forbidden": "Forbidden",
+  "Not_Found": "Not found",
+  "Not_Implement": "Function has not implemented yet",
+  "Internal_Server_Error": "Internal server error",
+  "Errors": {
+    "general": "Có lỗi xảy ra, vui lòng thử lại",
+    "create": "Thêm mới dữ liệu lỗi: %0",
+    "update": "Cập nhật dữ liệu lỗi: %0",
+    "delete": "Đã xóa dữ liệu lỗi: %0",
+    "login": "Email hoặc mật khẩu không đúng",
+    "register": "Đăng ký tài khoản không thành công: %0",
+    "Permission_Denied": "Bạn không có quyền thực hiện thao tác này.",
+    "Cannot_Change_Order_Status": "Không thể thay đổi trạng thái đơn hàng bằng cách cập nhật dữ liệu",
+    "Cannot_Delete": "Bạn không có quyền để xóa bản ghi này",
+    "Change_Password": "Cập nhật mật khẩu xảy ra lỗi: %0",
+    "Change_Order_Status": "Cập nhật trạng thái đơn hàng xảy ra lỗi: %0",
+    "Email_Invalid": "Địa chỉ email không hợp lệ (%0)",
+    "Load_Detail_Failed": "Lấy dữ liệu chi tiết xảy ra lỗi: %0",
+    "Load_Lists_Failed": "Lấy danh sách xảy ra lỗi: %0",
+    "New_Old_Pw_Must_Different": "Mật khẩu mới phải khác mật khẩu cũ",
+    "Incorrect_Password": "Mật khẩu không chính xác. Nếu bạn đã quên mật khẩu, vui lòng liên hệ quản trị viên để được trợ giúp.",
+    "Old_Pw_Not_Match": "Mật khẩu cũ không đúng",
+    "Pw_Len_Warning": "Mật khẩu phải từ %0 ~ %1 kí tự",
+    "Pw_Not_Match": "Mật khẩu không khớp nhau. Vui lòng xác nhận lại.",
+    "Reset_Password": "Không thể reset mật khẩu đăng nhập.",
+    "accounts": {
+      "Not_Activated": "Tài khoản chưa được kích hoạt. Vui lòng nhập email để lấy mã kích hoạt.",
+      "Activation_Expired": "Mã kích hoạt đã hết hạn.",
+      "Activation_Invalid": "Mã kích hoạt không hợp lệ.",
+      "Customer_Not_Found": "Không tìm thấy mối quan hệ giữa thông tin khách hàng và tài khoản người dùng"
+    },
+    "contracts": {
+      "Status_InValid": "Trạng thái hợp đồng không hợp lệ."
+    },
+    "groups": {
+      "default": "Không thể tạo hoặc chỉ định nhóm phát mặc định của hệ thống"
+    },
+    "playlist": {
+      "default": "Không thể tạo hoặc chỉ định danh sách phát mặc định của hệ thống"
+    },
+    "Create_Folder_Media": "Can not create media folder: %0",
+    "deploy": "Triển khai thất bại: %0",
+    "unDeploy": "Ngừng triển khai thất bại: %0",
+    "Device_Offline": "Thiết bị đang ngoại tuyến. Không thể thực hiện thao tác này.",
+    "device": {
+      "Not_Company_Found": "Thiết bị %0 chưa được gán với khách hàng",
+      "Not_Group_Found": "Thiết bị %0 chưa được gán với danh sách phát"
+    }
+  },
+  "Success": {
+    "general": "Thành công!",
+    "create": "Thêm mới dữ liệu thành công",
+    "update": "Cập nhật dữ liệu thành công",
+    "delete": "Đã xóa dữ liệu thành công",
+    "upload": "Tải lên dữ liệu thành công",
+    "login": "Đăng nhập thành công",
+    "register": "Đăng ký tài khoản thành công",
+    "Change_Password": "Cập nhật mật khẩu thành công",
+    "Reset_Password": "Đặt lại mật khẩu mới thành công, bạn hãy dùng mật khẩu mới để tiếp tục đăng nhập.",
+    "accounts": {
+      "delete": "Tài khoản %0 đã bị xóa",
+      "Send_Mail_Created": "Tài khoản %0 đã tạo xong, thông tin đăng nhập đã được gửi đến địa chỉ email %1."
+    },
+    "deploy": "Triển khai thành công",
+    "unDeploy": "Ngừng triển khai thành công",
+    "Export_Excel": "Xuất file excel thành công",
+    "Set_Wifi": "Cài đặt thành công. Thiết bị sẽ tự khởi động lại sau 10 giây"
+  },
+  "Load_Lists_Errors": {
+    "general": "Lấy danh sách đối tượng xảy ra lỗi: %0",
+    "user": "Lấy danh sách người dùng xảy ra lỗi: %0",
+    "agency": "Lấy danh sách agency xảy ra lỗi: %0",
+    "company": "Lấy danh sách khách hàng xảy ra lỗi: %0",
+    "customer": "Lấy danh sách khách hàng xảy ra lỗi: %0",
+    "area": "Lấy danh sách khu vực xảy ra lỗi: %0",
+    "ooh": "Lấy danh sách vị trí xảy ra lỗi: %0",
+    "group": "Lấy danh sách nhóm phát xảy ra lỗi: %0",
+    "device": "Lấy danh sách thiết bị xảy ra lỗi: %0",
+    "playlist": "Lấy danh sách phát xảy ra lỗi: %0",
+    "asset": "Lấy danh sách nội dung xảy ra lỗi: %0",
+    "label": "Lấy danh sách nhãn xảy ra lỗi: %0"
+  },
+  "Found_Errors": {
+    "general": "Tìm kiếm đối tượng xảy ra lỗi: %0",
+    "user": "Tìm kiếm người dùng xảy ra lỗi: %0",
+    "agency": "Tìm kiếm agency xảy ra lỗi: %0",
+    "company": "Tìm kiếm khách hàng xảy ra lỗi: %0",
+    "customer": "Tìm kiếm khách hàng xảy ra lỗi: %0",
+    "area": "Tìm kiếm khu vực xảy ra lỗi: %0",
+    "ooh": "Tìm kiếm vị trí xảy ra lỗi: %0",
+    "group": "Tìm kiếm nhóm phát xảy ra lỗi: %0",
+    "device": "Tìm kiếm thiết bị xảy ra lỗi: %0",
+    "playlist": "Tìm kiếm danh sách phát xảy ra lỗi: %0",
+    "asset": "Tìm kiếm nội dung xảy ra lỗi: %0",
+    "label": "Tìm kiếm nhãn xảy ra lỗi: %0"
+  },
+  "Exists": {
+    "general": "Đối tượng %0 đã tồn tại.",
+    "user": "Người dùng %0 đã tồn tại.",
+    "agency": "Agency %0 đã tồn tại.",
+    "company": "Khách hàng %0 đã tồn tại.",
+    "customer": "Khách hàng %0 đã tồn tại.",
+    "area": "Khu vực %0 đã tồn tại.",
+    "ooh": "Vị trí %0 đã tồn tại.",
+    "group": "Nhóm phát %0 đã tồn tại.",
+    "playlist": "Danh sách phát %0 đã tồn tại.",
+    "asset": "Nội dung %0 đã tồn tại.",
+    "label": "Nhãn %0 đã tồn tại."
+  },
+  "Not_Exists": {
+    "general": "Đối tượng %0 không tồn tại hoặc đã bị xóa.",
+    "user": "Tài khoản %0 không tồn tại.",
+    "agency": "Agency %0 không tồn tại.",
+    "company": "Khách hàng %0 không tồn tại.",
+    "customer": "Khách hàng %0 không tồn tại.",
+    "area": "Khu vực %0 không tồn tại.",
+    "ooh": "Vị trí %0 không tồn tại.",
+    "group": "Nhóm phát %0 không tồn tại.",
+    "device": "Thiết bị %0 không tồn tại.",
+    "playlist": "Danh sách phát %0 không tồn tại.",
+    "asset": "Nội dung %0 không tồn tại.",
+    "label": "Nhãn %0 không tồn tại."
+  },
+  "Not_Founds": {
+    "general": "Đối tượng %0 không được tìm thấy hoặc đã bị xóa.",
+    "Request_Object": "Invalid request. Object is required."
+  },
+  "Required": {
+    "general": "Vui lòng nhập đầy đủ thông tin"
+  },
+  "Unique": {
+    "agency": {
+      "code": "Mã khu vực %0 này đã tồn tại. Vui lòng dùng một mã khác."
+    },
+    "area": {
+      "code": "Mã khu vực %0 này đã tồn tại. Vui lòng dùng một mã khác."
+    },
+    "company": {
+      "code": "Mã khách hàng %0 này đã tồn tại. Vui lòng dùng một mã khác."
+    },
+    "customer": {
+      "code": "Mã khách hàng %0 này đã tồn tại. Vui lòng dùng một mã khác."
+    },
+    "label": {
+      "name": "Nhãn %0 này đã tồn tại. Vui lòng dùng một nhãn khác."
+    },
+    "user": {
+      "code": "Mã người dùng %0 này đã tồn tại. Vui lòng dùng một mã khác.",
+      "email": "Email %0 đã được sử dụng. Vui lòng dùng email khác."
+    }
+  },
+  "SendMail": {
+    "Title_No_Content": "%0 Cảnh báo thiết bị không phát nội dung",
+    "Title_On_Offline": "%0 Cảnh báo thiết bị bật/tắt",
+    "Notify_No_Content": "Thiết bị %0 đang không phát nội dung gì.",
+    "Notify_Offline": "Thiết bị %0 mới bị ngắt kết nối với hệ thống.",
+    "Notify_Online": "Thiết bị %0 mới kết nối với hệ thống."
+  },
+  "DayInWeek": {
+    "monday": "Thứ 2",
+    "tuesday": "Thứ 3",
+    "wednesday": "Thứ 4",
+    "thursday": "Thứ 5",
+    "friday": "Thứ 6",
+    "saturday": "Thứ 7",
+    "sunday": "Chủ nhật"
+  },
+  "Roles": {
+    "admin": "Quản trị hệ thống",
+    "maker": "Cài đặt nội dung",
+    "checker": "Duyệt nội dung",
+    "streamer": "Theo dõi thiết bị",
+    "customer": "Khách hàng",
+    "agency": "Đối tác"
+  }
+}
