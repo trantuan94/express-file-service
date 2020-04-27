@@ -32,14 +32,14 @@ class Service extends BaseSevice {
       console.log('err', err);
       throw err;
     }
-    console.log('handler object ', object);
+
     if (object && object.filePath) {
       [err, rs] = await to(FileUtil.moveFile(object.filePath, installation));
       if (err) {
         throw err;
       }
-      this.encodeFile(installation)
-      console.log('handle file object', object);
+      this.encodeFile(installation);
+  
       return object;
     } else {
       throw new Error(`Not found file: ${filePath} to move  ${installation}`);

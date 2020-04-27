@@ -9,10 +9,34 @@ message Request {
     string options = 1;
     string methodName = 2;
 }
+message TimeStamp {
+    string when = 1;
+}
 message Response {
+    int32 code = 1;
+    string message = 2;
+    string data = 3;
+}
+message Result {
     string msg = 1;
+}
+message Filter {
+    string options = 1;
+}
+message List {
+    int32 code = 1;
+    string message = 2;
+    Pagination data = 3;
+}
+message Pagination {
+    int32 skip = 1;
+    int32 limit = 2;
+    int32 count = 3;
+    int32 total = 4;
+    repeated Subject list_data = 5;
 }
 
 service FileService {
+    rpc List (Filter) returns (List) {}
     rpc fetch (Request) returns (Response) {}
 }

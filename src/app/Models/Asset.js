@@ -38,22 +38,28 @@ const FIELDS = {
     type: Schema.ObjectId,
     index: true
   },
+  customer: {
+    type: Schema.ObjectId,
+    index: true,
+    default: null
+  },
   // times
   insert: {
     when: {type: Date, default: Date.now},
-    by: {type: Schema.ObjectId}
+    by: {type: Schema.ObjectId, ref: 'User'}
   },
   update: {
     when: {type: Date},
-    by: {type: Schema.ObjectId}
+    by: {type: Schema.ObjectId, ref: 'User'}
   },
   delete: {
     when: {type: Date},
-    by: {type: Schema.ObjectId}
+    by: {type: Schema.ObjectId, ref: 'User'}
   }
 }
 
 const arrayJoin = [
+  {path: 'company', select: 'name address'}
 ];
 
 let tableSchema = BaseSchema(FIELDS, projection, null, arrayJoin);

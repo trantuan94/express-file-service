@@ -3,6 +3,7 @@
 const to = require('await-to-js').default;
 const DBUtil = require('../../../utils/Database');
 const Utils = require('../../../utils');
+const {APP_KEY} = require('../../../config/env/auth');
 const statusCode = {
   UNIMPLEMENTED: 12,
   INVALID_ARGUMENT: 3
@@ -75,14 +76,24 @@ class BaseService {
         statusCode.UNIMPLEMENTED
       );
     }
-    let [err, result] = await to(this[methodName](options));
-    if (err) return callback(err, null);
-    callback(null, {msg: JSON.stringify(result)});
+    let {secret} = options;
+    if (!secret || !APP_KEY[secret]) {
+      msg = HttpUtil.createError(HttpUtil.METHOD_NOT_ALLOWED, `System is not supported`);
+      return this.response(callback, msg)
+    }
+    options.scope = APP_KEY[secret];
+    delete options.secret;
+    return await this[methodName](callback, options)
   }
 
   error(cb, message, code = statusCode.INVALID_ARGUMENT) {
     const err = {code, message};
     cb(err, null);
+  }
+
+  response(cb, {code = HttpUtil.OK, message = "Success", data = undefined, stringify = true}) {
+    if (data && stringify) data = JSON.stringify(data);
+    cb(null, {code, message, data})
   }
 
   bindingMethods(obj) {
