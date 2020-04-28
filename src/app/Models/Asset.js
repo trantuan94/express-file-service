@@ -43,6 +43,7 @@ const FIELDS = {
     index: true,
     default: null
   },
+  scope: { type: String, default: 'digital', index: true},
   // times
   insert: {
     when: {type: Date, default: Date.now},

@@ -2,6 +2,7 @@
 
 const to = require('await-to-js').default;
 const DBUtil = require('../../../utils/Database');
+const HttpUtil = require('../../../utils/http');
 const Utils = require('../../../utils');
 const {APP_KEY} = require('../../../config/env/auth');
 const statusCode = {
@@ -19,24 +20,45 @@ class BaseService {
   async lists(call, callback) {
     let {options} = call.request;
     options = options ? JSON.parse(options) : {};
-    const {page, perPage, filters = {}} = options;
+    let {page, perPage, conditions = {}, filters = [], sorts = [], secret} = options;
+    if (!secret || !APP_KEY[secret]) {
+      let msg = HttpUtil.createError(HttpUtil.METHOD_NOT_ALLOWED, `System is not supported`);
+      return this.response(callback, msg)
+    }
+
+    conditions.scope = APP_KEY[secret];
+    options = {
+      page: page,
+      perPage: perPage,
+      filters: conditions,
+      sorts: null
+    }
+    if (filters.length) {
+      options = DBUtil.setFilters(options, filters)
+    }
+    if (sorts.length) {
+      options = DBUtil.setSortConditions(options, sorts)
+    }
     let [err, rs] = await to(Promise.all([
       this.model.lists(options),
-      this.model.getCount(filters)
+      this.model.getCount(options.filters)
     ]));
-
-    if (err) return callback(err);
-    rs = DBUtil.paginationResult(page, perPage, rs[0], rs[1], filters);
-    delete rs.filters;
-    callback(null, rs);
+    if (err) {
+      rs = {code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message}
+    } else {
+      rs = {data: DBUtil.paginationResult(page, perPage, rs[0], rs[1], filters), stringify: false}
+    }
+    return this.response(callback, rs);
   }
 
-  async detail(call, callback) {
-    const {params} = call.request;
-    const [err, rs] = await to(this.model.getOne({_id: params}, true));
-    if (err) return callback(err);
-
-    callback(null, {msg: rs});
+  async detail(cb, options) {
+    let [err, rs] = await to(this.model.getOne(options, true));
+    if (err) {
+      rs = {code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message}
+    } else {
+      rs = {code: HttpUtil.OK, message: 'Success', data: rs}
+    }
+    return this.response(cb, rs)
   }
 
   async filters(call, callback) {

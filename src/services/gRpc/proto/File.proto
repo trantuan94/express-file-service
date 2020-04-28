@@ -4,6 +4,25 @@ message Empty {}
 message Subject {
     string _id = 1;
     string name = 2;
+    string type = 3;
+    optional string duration = 4;
+    string size = 5;
+    string urlFile = 6;
+    string installation = 7;
+    string scope = 8;
+    string customer = 9;
+    string company = 10;
+    optional Thumbnail thumbnail = 11;
+    optional Validity validity = 12;
+}
+message Thumbnail {
+    string image = 1;
+    string path = 2;
+}
+message Validity {
+    bool enable = 1;
+    string startDate = 2;
+    string endDate = 3;
 }
 message Request {
     string options = 1;

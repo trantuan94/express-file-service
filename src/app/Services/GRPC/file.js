@@ -1,5 +1,6 @@
 'use strict'
 
+const fs = require('fs');
 const BaseService = require('.');
 const to = require('await-to-js').default;
 const HttpUtil = require('../../../utils/http');
@@ -17,20 +18,65 @@ class FileService extends BaseService {
   }
 
   async lists(call, callback) {
-    console.log('call to list files');
-    return super.lists(call, callback)
+    return super.lists(call, callback);
   }
 
   async detail(call, callback) {
     return super.detail(call, callback)
   }
 
-  async filters(call, callback) {
-    return super.filters(call, callback)
+  async update (callback, options) {
+    let { _id, params } = options;
+    params = params || {}
+    let err, result;
+    [err, result] = await to(this.model.getOne({ _id }));
+    if (err) {
+      return this.response(callback, { code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
+    }
+    if (!result) {
+      return this.response(callback, { code: HttpUtil.NOT_FOUND, message: 'Not found file'});
+    }
+    [err, result] = await to(this.model.updateItem(_id, params));
+    if (err) {
+      return this.response(callback, { code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
+    }
+
+    return this.response(callback, { data: result });
   }
 
-  async update(call, callback) {
-    return super.update(call, callback)
+  async destroy (cb, options) {
+    console.log('destroy file');
+    let { _id, softDatete } = options;
+    let err, result;
+    [err, result] = await to(this.model.getOne({ _id }, false));
+    if (err) {
+      return this.response(cb, { code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
+    }
+    console.log('result', result);
+    if (!result) {
+      return this.response(cb, { code: HttpUtil.NOT_FOUND, message: 'Not found file'});
+    }
+    let fileInstallation = result.installation;
+
+    if (softDatete) {
+      [err, result] = await to(this.model.softDelete({_id: _id}));
+    } else {
+      [err, result] = await to(this.model.delete(_id));
+    }
+    if (err) {
+      console.log(err);
+      return this.response(cb, { code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
+    }
+    fs.unlink(fileInstallation, (err) => {
+      if (err) {
+        return this.response(cb, { code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
+      }
+    });
+    return this.response(cb, { data: result })
+  }
+
+  async filters(call, callback) {
+    return super.filters(call, callback)
   }
 
   async fetch(call, callback) {
