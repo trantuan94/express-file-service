@@ -23,10 +23,10 @@ class Service extends BaseSevice {
     })
   }
 
-  async handleFile(file, authUser) {
+  async handleFile(file, storageInfo) {
     let {fileName, filePath, fileType, installation} = file;
     let err, object, rs;
-    let fileHandler = this._getFileHandler(fileType, authUser);
+    let fileHandler = this._getFileHandler(fileType, storageInfo);
     [err, object] = await to(fileHandler.handle({ filePath, filename: fileName, fileType }));
     if (err) {
       console.log('err', err);
@@ -102,18 +102,18 @@ class Service extends BaseSevice {
     return `${size} KB`
   }
 
-  _getFileHandler (fileType, authUser) {
+  _getFileHandler (fileType, storageInfo) {
     switch (fileType) {
       case 'video':
-        return new VideoFileHandler(authUser);
+        return new VideoFileHandler(storageInfo);
       case 'audio':
-        return new AudioFileHandler(authUser);
+        return new AudioFileHandler(storageInfo);
       case 'radio':
-        return new AudioFileHandler(authUser);
+        return new AudioFileHandler(storageInfo);
       case 'image':
-        return new ImageFileHandler(authUser);
+        return new ImageFileHandler(storageInfo);
       default:
-        return new OthersFileHandler(authUser);
+        return new OthersFileHandler(storageInfo);
     }
   }
 }

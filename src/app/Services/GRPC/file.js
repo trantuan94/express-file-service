@@ -84,10 +84,19 @@ class FileService extends BaseService {
   }
 
   async store (cb, options) {
+    console.log('store file');
     let err, result;
-    const { files, assetDir, authUser, scope, companyId = null, customerId = null, categories = []} = options;
+    const { 
+      files, 
+      storageInfo, 
+      scope, 
+      companyId = null,
+      customerId = null, 
+      categories = [],
+      authUser
+    } = options;
     let data = [];
-    console.log('scope', scope);
+    let {storageFolder } = storageInfo;
     let actions = [];
     let filenames = [];
     files.map(file => {
@@ -99,7 +108,7 @@ class FileService extends BaseService {
         type: fileType,
         size: `${file.fileSize || 0} KB`,
         installation: file.installation,
-        urlFile: file.installation.replace(assetDir, 'media'),
+        urlFile: file.installation.replace(storageFolder, 'media'),
         label: categories || [],
         company: companyId,
         customer: customerId,
@@ -108,7 +117,7 @@ class FileService extends BaseService {
           by: authUser._id
         }
       });
-      actions.push(FileHandler.handleFile(file, authUser));
+      actions.push(FileHandler.handleFile(file, storageInfo));
     });
     let duplicatedCond = {
       name: {$in: filenames},
@@ -135,7 +144,7 @@ class FileService extends BaseService {
       console.log('err', err);
       return this.response(cb, {code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
     }
-    console.log('handle file success.')
+    console.log('store file success.')
 
     return this.response(cb, { data: result});
   }

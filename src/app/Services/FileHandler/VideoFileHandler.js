@@ -8,18 +8,15 @@ const config = require('../../../config');
 const fs = require('fs');
 const path = require('path');
 class VideoFileHandler {
-  storageFolder = null;
   thumbnailDir = null;
   assetDir = null;
   object = { type: 'video'};
   metadata = null;
 
-  constructor (authUser) {
-    this.storageFolder = FileUtil.getSyncFolder(authUser);
-    this.thumbnailDir = path.join(config.mediaDir, this.storageFolder,
-      config.mediaDefault.thumbnailFolder);
-    this.assetDir = path.join(config.mediaDir, this.storageFolder,
-        config.mediaDefault.assetFolder);
+  constructor(storageInfo) {
+    let { thumbnailDir, assetDir } = storageInfo;
+    this.thumbnailDir = thumbnailDir;
+    this.assetDir = assetDir;
   }
 
   async handle ({ filePath, filename }) {

@@ -4,17 +4,14 @@ const FileUtil = require('../../../utils/files');
 const config = require('../../../config');
 
 class OthersFileHandler {
-  storageFolder = null;
   thumbnailDir = null;
   assetDir = null;
   object = { type: 'other'};
 
-  constructor (authUser) {
-    this.storageFolder = FileUtil.getSyncFolder(authUser);
-    this.thumbnailDir = path.join(config.mediaDir, this.storageFolder,
-      config.mediaDefault.thumbnailFolder);
-    this.assetDir = path.join(config.mediaDir, this.storageFolder,
-      config.mediaDefault.assetFolder);
+  constructor(storageInfo) {
+    let { thumbnailDir, assetDir } = storageInfo;
+    this.thumbnailDir = thumbnailDir;
+    this.assetDir = assetDir;
   }
 
   async handle ({filePath, filename, fileType }) {
