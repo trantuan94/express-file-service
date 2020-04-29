@@ -15,7 +15,6 @@ module.exports = function (grpc, protoLoader, gRpcServer, subject) {
   const subjectProto = protoLoader.loadSync(path, protoOptions)
   const descriptor = grpc.loadPackageDefinition(subjectProto)
   const serviceName = `${subject}Service`;
-  console.log('subject', subject);
   const Service = require(`${srcPath}/app/Services/GRPC/${subject.toLowerCase()}`)
 
   gRpcServer.addService(descriptor[serviceName].service, {

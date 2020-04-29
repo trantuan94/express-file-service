@@ -83,10 +83,11 @@ class FileService extends BaseService {
     return super.fetch(call, callback);
   }
 
-  async handleFiles (cb, options) {
+  async store (cb, options) {
     let err, result;
-    const { files, assetDir, authUser, companyId = null, customerId = null, categories = []} = options;
+    const { files, assetDir, authUser, scope, companyId = null, customerId = null, categories = []} = options;
     let data = [];
+    console.log('scope', scope);
     let actions = [];
     let filenames = [];
     files.map(file => {
@@ -102,6 +103,7 @@ class FileService extends BaseService {
         label: categories || [],
         company: companyId,
         customer: customerId,
+        scope: scope,
         insert: {
           by: authUser._id
         }
@@ -133,9 +135,9 @@ class FileService extends BaseService {
       console.log('err', err);
       return this.response(cb, {code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
     }
-    console.log('result', result);
+    console.log('handle file success.')
 
-    return this.response(cb, { code: HttpUtil.OK, message: 'Handle files successful.', data: result});
+    return this.response(cb, { data: result});
   }
 
   async createLinkFile (cb, options) {
