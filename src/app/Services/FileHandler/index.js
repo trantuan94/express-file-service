@@ -10,6 +10,7 @@ const VideoFileHandler = require('./VideoFileHandler');
 const AudioFileHandler = require('./AudioFileHandler');
 const ImageFileHandler = require('./ImageFileHandler');
 const OthersFileHandler = require('./OthersFileHandler');
+
 class Service extends BaseSevice {
   constructor() {
     super(Service)
@@ -27,7 +28,7 @@ class Service extends BaseSevice {
     let {fileName, filePath, fileType, installation} = file;
     let err, object, rs;
     let fileHandler = this._getFileHandler(fileType, storageInfo);
-    [err, object] = await to(fileHandler.handle({ filePath, filename: fileName, fileType }));
+    [err, object] = await to(fileHandler.handle({filePath, filename: fileName, fileType}));
     if (err) {
       console.log('err', err);
       throw err;
@@ -39,7 +40,7 @@ class Service extends BaseSevice {
         throw err;
       }
       this.encodeFile(installation);
-  
+
       return object;
     } else {
       throw new Error(`Not found file: ${filePath} to move  ${installation}`);
@@ -49,9 +50,9 @@ class Service extends BaseSevice {
   getFileType(filename) {
     if (filename.match(config.imageRegex)) {
       return 'image';
-    } else if(filename.match(config.videoRegex)) {
+    } else if (filename.match(config.videoRegex)) {
       return 'video';
-    } else if(filename.match(config.audioRegex)) {
+    } else if (filename.match(config.audioRegex)) {
       return 'audio';
     } else if (filename.match(config.htmlRegex)) {
       return 'html';
@@ -102,7 +103,7 @@ class Service extends BaseSevice {
     return `${size} KB`
   }
 
-  _getFileHandler (fileType, storageInfo) {
+  _getFileHandler(fileType, storageInfo) {
     switch (fileType) {
       case 'video':
         return new VideoFileHandler(storageInfo);
@@ -117,4 +118,5 @@ class Service extends BaseSevice {
     }
   }
 }
+
 module.exports = new Service()

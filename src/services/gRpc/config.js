@@ -1,5 +1,5 @@
 const rootPath = process.cwd()
-const {GRPC_HOST = '127.0.0.1', GRPC_PORT = '50053'} = process.env
+const {GRPC_HOST = '127.0.0.1', GRPC_PORT = '50052'} = process.env
 
 module.exports = {
   rootPath: rootPath,

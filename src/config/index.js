@@ -1,3 +1,5 @@
+"use strict"
+
 const path = require('path');
 
 const rootPath = process.cwd();
@@ -13,17 +15,13 @@ const syncDir = `${dataDir}/sync_folders`;
 const dailyLogDir = `${logStoreDir}/daily`;
 const powerLogDir = `${logStoreDir}/power`;
 
-
 const {FORMAT_DATE = 'YYYY-MM-DD'} = process.env;
 const {baseUrl, backendHost, backendPort} = require('./http');
-const calendarConfig = require('./calendar');
 const DB_CONFIG = require('./database');
 const fileConfig = require('./file');
-const streamConfig = require('./stream');
 const {uploadDir, uploadHost, downloadDir, downloadFolder} = require('./upload');
 const downloadUrl = `${baseUrl}/downloads`;
 
-// const pdfMakeFonts = require('../libs/pdfmake/fonts.json');
 let settings = require('./setting.json');
 const queue = require('./queue');
 
@@ -67,18 +65,8 @@ module.exports = {
 
   // config database
   mongodb: DB_CONFIG,
-  session: {
-    secret: 'piSignage'
-  },
   ...settings,
-  ...calendarConfig,
   ...fileConfig,
-  ...streamConfig,
-  // pdfMakeFonts: pdfMakeFonts,
-  piMqImage: {
-    file: 'piMqImage.tar.gz',
-    name: 'piMqImage',
-  },
   groupDefault: 'default',
   playlistDefault: 'TV_OFF',
   conversionValue: 1000,

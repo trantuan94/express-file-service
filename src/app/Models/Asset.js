@@ -17,7 +17,7 @@ const FIELDS = {
   type: {type: String},
   duration: {type: String},
   size: {type: String},
-  urlFile: { type: String },
+  urlFile: {type: String},
   installation: {type: String, require: true},
   thumbnail: {
     image: {type: String},
@@ -43,7 +43,7 @@ const FIELDS = {
     index: true,
     default: null
   },
-  scope: { type: String, default: 'digital', index: true},
+  scope: {type: String, default: 'digital', index: true},
   // times
   insert: {
     when: {type: Date, default: Date.now},
@@ -59,10 +59,6 @@ const FIELDS = {
   }
 }
 
-const arrayJoin = [
-  {path: 'company', select: 'name address'}
-];
-
-let tableSchema = BaseSchema(FIELDS, projection, null, arrayJoin);
+let tableSchema = BaseSchema(FIELDS, projection);
 
 module.exports = mongoose.model(mTAG, tableSchema);

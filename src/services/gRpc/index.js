@@ -1,4 +1,5 @@
 'use strict'
+
 const gRpc = require('grpc')
 const protoLoader = require('@grpc/proto-loader')
 const gRpcServer = new gRpc.Server()

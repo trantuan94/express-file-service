@@ -25,36 +25,36 @@ class FileService extends BaseService {
     return super.detail(call, callback)
   }
 
-  async update (callback, options) {
-    let { _id, params } = options;
+  async update(callback, options) {
+    let {_id, params} = options;
     params = params || {}
     let err, result;
-    [err, result] = await to(this.model.getOne({ _id }));
+    [err, result] = await to(this.model.getOne({_id}));
     if (err) {
-      return this.response(callback, { code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
+      return this.response(callback, {code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
     }
     if (!result) {
-      return this.response(callback, { code: HttpUtil.NOT_FOUND, message: 'Not found file'});
+      return this.response(callback, {code: HttpUtil.NOT_FOUND, message: 'Not found file'});
     }
     [err, result] = await to(this.model.updateItem(_id, params));
     if (err) {
-      return this.response(callback, { code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
+      return this.response(callback, {code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
     }
 
-    return this.response(callback, { data: result });
+    return this.response(callback, {data: result});
   }
 
-  async destroy (cb, options) {
+  async destroy(cb, options) {
     console.log('destroy file');
-    let { _id, softDatete } = options;
+    let {_id, softDatete} = options;
     let err, result;
-    [err, result] = await to(this.model.getOne({ _id }, false));
+    [err, result] = await to(this.model.getOne({_id}, false));
     if (err) {
-      return this.response(cb, { code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
+      return this.response(cb, {code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
     }
     console.log('result', result);
     if (!result) {
-      return this.response(cb, { code: HttpUtil.NOT_FOUND, message: 'Not found file'});
+      return this.response(cb, {code: HttpUtil.NOT_FOUND, message: 'Not found file'});
     }
     let fileInstallation = result.installation;
 
@@ -65,14 +65,14 @@ class FileService extends BaseService {
     }
     if (err) {
       console.log(err);
-      return this.response(cb, { code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
+      return this.response(cb, {code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
     }
     fs.unlink(fileInstallation, (err) => {
       if (err) {
-        return this.response(cb, { code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
+        return this.response(cb, {code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
       }
     });
-    return this.response(cb, { data: result })
+    return this.response(cb, {data: result})
   }
 
   async filters(call, callback) {
@@ -83,20 +83,20 @@ class FileService extends BaseService {
     return super.fetch(call, callback);
   }
 
-  async store (cb, options) {
+  async store(cb, options) {
     console.log('store file');
     let err, result;
-    const { 
-      files, 
-      storageInfo, 
-      scope, 
+    const {
+      files,
+      storageInfo,
+      scope,
       companyId = null,
-      customerId = null, 
+      customerId = null,
       categories = [],
       authUser
     } = options;
     let data = [];
-    let {storageFolder } = storageInfo;
+    let {storageFolder} = storageInfo;
     let actions = [];
     let filenames = [];
     files.map(file => {
@@ -121,9 +121,9 @@ class FileService extends BaseService {
     });
     let duplicatedCond = {
       name: {$in: filenames},
-      company: companyId ? companyId : { $exists: false }
+      company: companyId ? companyId : {$exists: false}
     };
-    
+
     [err, result] = await to(this.model.findByCondition(duplicatedCond));
     if (err) return this.response(cb, {code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
 
@@ -132,10 +132,10 @@ class FileService extends BaseService {
       [err, result] = await to(Promise.all(files.map(file => FileUtil.removeFile(file.installation, file.name))));
       if (err) {
         console.log('err', err);
-        return this.response(cb, { code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
+        return this.response(cb, {code: HttpUtil.INTERNAL_SERVER_ERROR, message: err.message});
       }
       if (result.length) {
-        return this.response(cb, { code: HttpUtil.UNPROCESSABLE_ENTITY, message})
+        return this.response(cb, {code: HttpUtil.UNPROCESSABLE_ENTITY, message})
       }
     }
     actions.push(this.model.insertMany(data));
@@ -146,10 +146,10 @@ class FileService extends BaseService {
     }
     console.log('store file success.')
 
-    return this.response(cb, { data: result});
+    return this.response(cb, {data: result});
   }
 
-  async createLinkFile (cb, options) {
+  async createLinkFile(cb, options) {
 
   }
 }

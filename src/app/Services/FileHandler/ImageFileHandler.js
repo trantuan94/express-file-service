@@ -11,34 +11,34 @@ const ImageMagick = require('gm').subClass({imageMagick: true});
 class ImageFileHandler {
   thumbnailDir = null;
   assetDir = null;
-  object = { type: 'image'};
+  object = {type: 'image'};
 
   constructor(storageInfo) {
-    let { thumbnailDir, assetDir } = storageInfo;
+    let {thumbnailDir, assetDir} = storageInfo;
     this.thumbnailDir = thumbnailDir;
     this.assetDir = assetDir;
   }
 
-  async handle({ filePath, filename }) {
+  async handle({filePath, filename}) {
     let err, result;
     this.object.filename = filename;
     this.object.filePath = filePath;
 
     [err, result] = await to(this._createThumbnail(filePath, filename));
-    if(err) throw err;
+    if (err) throw err;
 
     [err, result] = await to(this._resize(filePath));
-    if(err) throw err;
+    if (err) throw err;
 
     [err, result] = await to(this._getFileSize(filePath));
-    if(err) throw err;
+    if (err) throw err;
 
     [err, result] = await to(this._getResolution(filePath));
-    if(err) throw err;
+    if (err) throw err;
 
     return this.object;
   }
-  
+
   async _createThumbnail(filePath, filename) {
     let thumbnailName = this._setThumbnailName(filename);
     let thumbnailPath = path.join(this.thumbnailDir, thumbnailName);
@@ -48,7 +48,7 @@ class ImageFileHandler {
         .autoOrient()
         .resize(thumbnailSize)
         .write(thumbnailPath, (err) => {
-          if(err) {
+          if (err) {
             console.log(`ImageMagick write '${filename}' error:`, err);
             reject(err);
           } else {
@@ -57,7 +57,7 @@ class ImageFileHandler {
               path: thumbnailPath
             }
 
-            resolve({ 
+            resolve({
               image: thumbnailPath.replace(config.mediaDir, "media"),
               path: thumbnailPath
             });
@@ -69,16 +69,16 @@ class ImageFileHandler {
   async _resize(filePath) {
     return new Promise((resolve, reject) => {
       ImageMagick(filePath)
-      .autoOrient()
-      .resize(1920, 1920, '>')
-      .write(filePath, (err, op) => {
-        if(err) {
-          console.log(`ImageMagick resize ${filePath} error:`, err);
-         reject(err);
-        }
+        .autoOrient()
+        .resize(1920, 1920, '>')
+        .write(filePath, (err, op) => {
+          if (err) {
+            console.log(`ImageMagick resize ${filePath} error:`, err);
+            reject(err);
+          }
 
-        resolve(filePath);
-      });
+          resolve(filePath);
+        });
     })
   }
 
@@ -100,12 +100,12 @@ class ImageFileHandler {
   async _getResolution(filePath) {
     return new Promise((resolve, reject) => {
       ImageMagick(filePath).size((err, value) => {
-        if(err) {
+        if (err) {
           console.log('cannot get resolution of file', filePath, err);
           reject(err);
         }
         this.object.resolution = value;
-  
+
         resolve(value);
       });
     })
@@ -116,4 +116,5 @@ class ImageFileHandler {
     return `${random}_${filename}`
   }
 }
+
 module.exports = ImageFileHandler
