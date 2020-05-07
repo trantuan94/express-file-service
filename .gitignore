@@ -1,10 +1,12 @@
 # Logs
-logs
+logs/*
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
+package-lock.json
+yarn.lock
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -33,9 +35,6 @@ bower_components
 
 # node-waf configuration
 .lock-wscript
-
-# Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
 
 # Dependency directories
 node_modules/
@@ -75,6 +74,15 @@ typings/
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
+# misc
+/.sass-cache
+/connect.lock
+
+# compiled output
+/tmp
+/dist
+/build
+
 # Next.js build output
 .next
 
@@ -102,4 +110,17 @@ dist
 
 # TernJS port file
 .tern-port
-package-lock.json
+
+# IDEs and editors
+/.idea
+.project
+.vscode/*
+
+#System Files
+.DS_Store
+Thumbs.db
+*.bak
+
+# config
+app.json
+src/config/setting.json
